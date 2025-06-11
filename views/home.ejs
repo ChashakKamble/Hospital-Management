@@ -48,32 +48,29 @@
             margin-right: 20px;
             transition: 0.3s;
             cursor: pointer;
-            position: relative;
+            
             padding: 5px 0;
         }
 
        
-        }
+        
 
 		/* Fix carousel height and make it responsive */
-		.carousel {
-		height: 80vh;
-		overflow: hidden;
-		}
+.carousel {
+    height: 90vh; /* Full screen height */
+    overflow: hidden;
+}
 
-		.carousel-inner {
-		height: 100%;
-		}
+.carousel-inner,
+.carousel-item {
+    height: 100%;
+}
 
-		.carousel-item {
-		height: 100%;
-		}
-
-		.carousel-item img {
-		height: 80vh; 		/* adjust as needed */
-		width: 100%; 		/* full width of container */
-		object-fit: cover; 	/* cover, contain, or fill */
-		}
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures image scales without distortion */
+}
 
       
 
@@ -165,7 +162,7 @@
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="#">CK Hospital</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -181,7 +178,7 @@
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="login.ejs">Login</a>
+                        <a class="nav-link" href="/login">Login</a>
                     </li>
                 </ul>
             </div>
@@ -199,22 +196,22 @@
   
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="C:\Users\ADMIN\Desktop\CK Hospital\c1.jpg" class="d-block w-100 carousel-img" alt="Hospital Front">
-      <div class="carousel-caption d-none d-md-block">
+      <img src="./doc_patient.png" class="d-block w-100" alt="Hospital Front">
+      <div class="carousel-caption d-none d-md-block ">
         <h5>Modern Infrastructure</h5>
         <p>State-of-the-art equipment and clean environment.</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="C:\Users\ADMIN\Desktop\CK Hospital\c2.jpg" class="d-block w-100 carousel-img" alt="Doctors">
-      <div class="carousel-caption d-none d-md-block">
+      <img src="./staff.png" class="d-block w-100" alt="Doctors">
+      <div class="carousel-caption d-none d-md-block text-black">
         <h5>Professional Doctors</h5>
         <p>Qualified staff with experience in every department.</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src= class="d-block w-100 carousel-img" alt="Emergency Care">
-      <div class="carousel-caption d-none d-md-block">
+      <img src="pic_3.jpg" class="d-block w-100" alt="Emergency Care">
+      <div class="carousel-caption d-none d-md-block text-black">
         <h5>24/7 Emergency</h5>
         <p>Immediate care available anytime, day or night.</p>
       </div>

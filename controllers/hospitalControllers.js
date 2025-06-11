@@ -5,7 +5,7 @@ exports.homePage=(req,res)=>{
      res.render("home");
 }
 exports.loginPage=(req,res)=>{
-     res.render("login");
+     res.render("login.ejs");
 }
 
 exports.addUser=async(req,res)=>{
