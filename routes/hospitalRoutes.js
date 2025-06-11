@@ -10,4 +10,7 @@ routes.get("/login",controller.loginPage);
 // for adding user
 routes.post("/addUser",controller.addUser);
 
+// for authenticating user
+routes.post("/authenticateUser",controller.authenticateUser);
+
 module.exports=routes;
