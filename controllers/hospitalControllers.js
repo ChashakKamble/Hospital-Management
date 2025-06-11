@@ -27,13 +27,16 @@ exports.authenticateUser = async (req, res) => {
     if (typeof result === "object") {
         req.session.user = result;
         if (role === "admin") {
-            res.redirect("/adminDash");
+            res.render("adminDash");
+            return;
         } else if (role === "doctor") {
-            res.redirect("/doctorDash");
+            res.render("doctorDash");
+            return ;
         } else if (role === "Reception") {
-            res.redirect("/receptionDash");
+            res.render("receptionDash");
+            return;
         }
-        res.redirect("/dashboard");
+       
     } else if (typeof result === "string" && result.startsWith("Invalid")) {
         res.render("error", { message: result });
     } else if (typeof result === "string" && result.startsWith("User")) {
