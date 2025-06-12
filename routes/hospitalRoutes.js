@@ -6,6 +6,8 @@ const controller=require("../controllers/hospitalControllers");
 routes.get("/",controller.homePage);
 // for loginpage
 routes.get("/login",controller.loginPage);
+// for Service page
+routes.get("/services",controller.servicePage);
 // for adding user
 routes.post("/addUser",controller.addUser);
 // for authenticating user

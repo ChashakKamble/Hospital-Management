@@ -11,6 +11,10 @@ exports.loginPage = (req, res) => {
     res.render("login",{message: ""});
 }
 
+exports.servicePage = (req, res) =>{
+    res.render("services");
+}
+
 exports.addUser = async (req, res) => {
     let { username, pass, role } = req.body;
     let result = await userSer.addUser(username, pass, role);
@@ -29,6 +33,7 @@ exports.addUser = async (req, res) => {
 exports.authenticateUser = async (req, res) => {
     let { username, pass, role } = req.body;
     let result = await userSer.authenticateUser(username, pass, role);
+    console.log("cheking result ",result);
     if (typeof result === "object") {
         req.session.userId = result.user_id; // Store user ID in session
         if (role === "Admin") {
