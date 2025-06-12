@@ -13,6 +13,29 @@ exports.isUsernameTaken=async(username)=>{
     });
 }
 
+// to get the admin by user id
+exports.getAdmin=async(userId)=>{
+    return new Promise((responce,reject)=>{
+        db.query("select * from admins where user_id = ? ",[userId],(err,res)=>{
+            if(err)
+                reject("Error while getting admin by id : "+err)
+            else
+                responce(res[0]);
+        })
+    }); 
+}
+ 
+exports.getUserById=async(userId)=>{    
+    return new Promise((responce,reject)=>{
+        db.query("select * from users where user_id = ?",[userId],(err,res)=>{
+            if(err)
+                reject("Error while getting user by id : "+err)
+            else
+                responce(res[0]);
+        })
+    }); 
+}
+
 exports.addUser=async(username,pass,role)=>{
        return new Promise((resp,reject)=>{
     db.query("insert into users values(null,?,?,?);",[username,pass,role],(err,res)=>{

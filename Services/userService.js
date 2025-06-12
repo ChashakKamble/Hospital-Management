@@ -17,6 +17,27 @@ class UserService{
             return err;
         } 
     }
+    async getAdmin(userid){
+        try{
+            let admin=await userModel.getAdmin(userid);
+            if(admin){
+                return user;
+            }else{
+                return "Admin Not Found";
+            }
+        }catch(err){
+            return err;
+        }   
+    }
+
+    async getUser(userid){
+        try{
+            let user=await userModel.getUserById(userid);
+            return user;    
+        }catch(err){
+            return err;
+        }   
+    }
 
     async authenticateUser(username,pass,role){
         try{

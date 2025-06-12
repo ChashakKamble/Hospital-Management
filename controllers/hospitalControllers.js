@@ -1,6 +1,7 @@
 let userService = require("../Services/userService");
 let userSer =new userService();
 let doctorService = require("../Services/doctorService");
+const con = require("../config/db");
 let doctorSer = new doctorService();
 exports.homePage = (req, res) => {
     res.render("home");
@@ -29,9 +30,10 @@ exports.authenticateUser = async (req, res) => {
     let { username, pass, role } = req.body;
     let result = await userSer.authenticateUser(username, pass, role);
     if (typeof result === "object") {
-        req.session.user = result;
+        req.session.userId = result.user_id; // Store user ID in session
         if (role === "Admin") {
-            res.render("adminDash",{message:""});
+            let allDocs=await doctorSer.getDoctors();
+            res.render("adminDash",{user:result,message:"",doctors:allDocs});
             return;
         } else if (role === "Doctor") {
             res.render("doctorDash");
@@ -52,11 +54,29 @@ exports.authenticateUser = async (req, res) => {
 
 exports.registerDoctor = async (req, res) => {
     let { name, email, contact, speci, exp, status } = req.body;
-    let adminid =5; // assuming adminid is stored in session
-    let result = await doctorSer.registerDoctor(name, email, contact, speci, exp, status, adminid);
+    let adminUserid =req.session.userId; // assuming adminid is stored in session
+    console.log("session id ",req.session.userId);
+    let admin=await userSer.getAdmin(adminUserid);
+    console.log("Admin ID:", admin);
+    let result = await doctorSer.registerDoctor(name, email, contact, speci, exp, status, admin.admin_id);
     if (typeof result === "object" && result.affectedRows > 0) {
-        res.render("adminDash", { message: "Doctor registered successfully!" });
+        let allDocs = await doctorSer.getDoctors();
+        res.render("adminDash", {user:admin,doctors:allDocs, message: "Doctor registered successfully!" });
     } else if (typeof result === "string" && result.startsWith("Error")) {
-        res.render("adminDash", { message: result });
+        res.render("error", { message: result });
     }
+}
+
+
+
+//for logout 
+exports.logout=(req,res)=>{
+    req.session.destroy((err) => {
+        if (err) {
+            console.error("Session destruction error:", err);
+            res.status(500).send("Internal Server Error : Unable to log out");
+        } else {
+            res.redirect("/login");
+        }
+    });
 }

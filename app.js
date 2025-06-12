@@ -12,7 +12,7 @@ app.use(express.static("public"));
 app.use(express.urlencoded({extended:true}));
 app.use(cookie());
 app.use(session({
-    secret: process.env.SESSION_SECRET || 'defaultSecret',
+    secret: 'MY Secret',
     resave: false,
     saveUninitialized: true,}));
 
