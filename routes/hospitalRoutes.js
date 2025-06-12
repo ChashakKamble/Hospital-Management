@@ -13,4 +13,8 @@ routes.post("/authenticateUser",controller.authenticateUser);
 
 // for registering doctor
 routes.post("/registerDoctor",controller.registerDoctor);
+
+// for logout
+routes.get("/logout",controller.logout);
+
 module.exports=routes;

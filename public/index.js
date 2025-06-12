@@ -1,6 +1,6 @@
 
 // array for the list of form divs in admindashboard
-const admForms = ["default-view", "addDoc", "viewDoc", "addRec", "viewRec"];
+const admForms = ["default-view", "addDoc", "viewDoc"];
 const showForm = (formId) => {
   // Hide all forms
   admForms.forEach((form) => {
