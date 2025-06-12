@@ -27,12 +27,11 @@ exports.addUser=async(username,pass,role)=>{
 exports.authenticateUser=async(username,role)=>{
     return new Promise((responce,reject)=>{
         db.query("select * from users where username = ? and role = ?",[username,role],(err,res)=>{
-            if(err)
+            if(err){
                 reject("Error while authenticating user : "+err)
-            if(res.length==0)
-                responce(false);
-            else
+            }else{
                 responce(res[0]);
+            }
         })
     });
 }

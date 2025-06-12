@@ -11,4 +11,6 @@ routes.post("/addUser",controller.addUser);
 // for authenticating user
 routes.post("/authenticateUser",controller.authenticateUser);
 
+// for registering doctor
+routes.post("/registerDoctor",controller.registerDoctor);
 module.exports=routes;

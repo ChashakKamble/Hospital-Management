@@ -19,7 +19,6 @@ class UserService{
     }
 
     async authenticateUser(username,pass,role){
-
         try{
             let user=await userModel.authenticateUser(username,role);
             if(user){
@@ -37,5 +36,4 @@ class UserService{
         }
     }
 }
-
-module.exports=new UserService();
+module.exports=UserService;

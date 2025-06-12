@@ -1,24 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard - CK Hospital</title>
+
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <nav><h1>Admin Dashboard</h1>
-        <div>
-    <p>Welcome, <%= user.name %>!</p>
-    <p>Your email is: <%= user.email %></p>
-    <p>Your role is: <%= user.role %></p></div>
-    <a href="/logout">Log out</a>
+
+    <nav>
+        <h1>Admin Dashboard</h1>
+        <h2>welcome :<%= user.name %></h2>
+        <a href="#" >Log Out</a>
     </nav>
-    
-    <section class="side-section">
-        <section>
-            
-        </section>
+  <main>
+    <section class="admin-menu">
+        <h4> Admin Panel</h4>
+
+    <strong>Doctor</strong>
+    <button   onclick="showForm('addDoc')">Add Doctor</button>
+    <button   onclick="showForm('viewDoctor')">View Doctors</button>
+
+    <strong>Receptionist</strong>
+    <button   onclick="showForm('addReceptionist')">Add Receptionist</button>
+    <button   onclick="showForm('viewReceptionist')">View Receptionists</button>
+
+    <button href="#" class="btn btn-danger w-100 mt-5"><i class="bi bi-box-arrow-right"></i> Logout</button>
     </section>
-   
+    <section class="form-win">
+        <div id="default-view"  >
+            <div class="card">
+                <strong>
+                    Total Doctors 
+                </strong>
+                <strong class="number">
+                    <br> 13
+                </strong>
+            </div>
+            <div class="card">
+                <strong>
+                    Total Patient 
+                </strong>
+                <strong class="number">
+                    <br> 50
+                </strong>
+            </div>
+            <div class="card">
+                <strong>
+                    Total Receptionist
+                </strong>
+                <strong class="number">
+                    <br> 2
+                </strong>
+            </div>
+        </div>
+        <div id="addDoc" class="form-container"   >
+            <h2>Doctor Registration Form</h2>
+            <form action="/registerDoctor" method="POST">
+                <label for="name">Name:</label>
+                <input type="text"  name="name" required>
+                <label for="name">Email:</label>
+                <input type="text"  name="email" required>
+                <label for="name">Contact:</label>
+                <input type="text"  name="contact" required>
+                <label for="name">Role:</label>
+                <input type="text"  name="role" value="Doctor" required>
+                <label for="speci">Specialization:</label>
+                <input type="text"  name="speci" required>
+                <label for="name">Experience:</label>
+                <input type="text"  name="exp" required>
+                <label for="name">Status:</label>
+                <input type="text"  name="status" required>
+
+                <input type="submit" value="Add Doctor">
+            </form>
+        </div>
+        <div id="viewDoc">
+            <h2>View Doctors</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Contact</th>
+                        
+                        <th>Specialization</th>
+                        <th>Experience</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% doctors.forEach(function(doctor) { %>
+                    <tr>
+                        <td><%= doctor.name %></td>
+                        <td><%= doctor.email %></td>
+                        <td><%= doctor.contact %></td>
+                        <td><%= doctor.speci %></td>
+                        <td><%= doctor.exp %></td>
+                        <td><%= doctor.status %></td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+
+        </div>
+    </section>
+  </main>
+  <% if(typeof message !== 'undefined' && message!=="") { %>
+    <script>
+      alert('<%= message %>');
+    </script>
+  <% } %>
+  <script type="text/javascript" src="./index.js"></script>
 </body>
 </html>
+

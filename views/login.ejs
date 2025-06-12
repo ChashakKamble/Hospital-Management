@@ -80,27 +80,27 @@
     <div class="login-header">
       <h3>Log in</h3>
     </div>
-    <form>
+    <form action="/authenticateUser" method="POST">
       <!-- Login ID -->
       <div class="mb-3">
         <label for="loginId" class="form-label"><b>Login ID</b></label>
-        <input type="text" class="form-control" id="loginId" placeholder="Enter your login ID" required>
+        <input type="text" name="username" class="form-control" id="loginId" placeholder="Enter your login ID" required>
       </div>
 
       <!-- Password -->
       <div class="mb-3">
         <label for="password" class="form-label"><b>Password</b></label>
-        <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+        <input name="pass" type="password" class="form-control" id="password" placeholder="Enter your password" required>
       </div>
 
       <!-- Dropdown -->
       <div class="mb-4">
         <label for="role" class="form-label"><b>Select Role</b></label>
-        <select class="form-select" id="role" required>
+        <select name="role" class="form-select" id="role" required>
           <option value="">Choose...</option>
-          <option value="admin">Admin</option>
-          <option value="doctor">Doctor</option>
-          <option value="reception">Reception</option>
+          <option value="Admin">Admin</option>
+          <option value="Doctor">Doctor</option>
+          <option value="Reception">Reception</option>
         </select>
       </div>
 
@@ -108,7 +108,12 @@
       <button type="submit" class="btn btn-primary w-100">Login</button>
     </form>
   </div>
-
+  <% if (typeof message !== "undefined" && message !== "") { %>
+    <script>
+      alert("<%= message %>");
+    </script>
+  <% } %>
+  
   <!-- Bootstrap Bundle JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
