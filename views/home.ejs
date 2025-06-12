@@ -48,70 +48,33 @@
             margin-right: 20px;
             transition: 0.3s;
             cursor: pointer;
-            
+            position: relative;
             padding: 5px 0;
         }
 
        
-        /*Hero section*/
-
-                /* Hero Section */
-        .hero-section {
-           background: linear-gradient(to right, #6dd5fa, #ffffff);
-			background-repeat: no-repeat;
-			background-size: cover;
-            height: 80vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: rgb(193, 192, 198);
-            position: relative;
-            overflow: hidden;
-            filter: brightness(0.6); /* Darken background slightly for better text contrast */
         }
 
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            animation: fadeInUp 1s ease-in-out;
-        }
+		/* Fix carousel height and make it responsive */
+		.carousel {
+		height: 50vh;
+		overflow: hidden;
+		}
 
-        .hero-content h1 {
-			color: rgb(0, 0, 0);
-            font-size: 50px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-        }
+		.carousel-inner {
+		height: 100%;
+		}
 
-        .hero-content p {
-			color: rgb(23, 23, 23);
-            font-size: 20px;
-            margin-bottom: 30px;
-            letter-spacing: 0.5px;
-            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
-        }
+		.carousel-item {
+		height: 100%;
+		}
+		
 
-        .hero-content a {
-            padding: 12px 30px;
-            background-color: rgb(122, 255, 232);
-            color: #004080;
-            font-weight: 600;
-            border-radius: 5px;
-            text-transform: uppercase;
-            text-decoration: none;
-            transition: 0.3s;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .hero-content a:hover {
-            background-color: rgb(194, 255, 125);
-            color: rgb(0, 0, 0);
-            transform: scale(1.1);
-        }
+		.carousel-item img {
+		height: 80vh;
+		width: 100%;
+		object-fit: cover;
+		}
 
       
 
@@ -203,7 +166,7 @@
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">CK Hospital</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -214,19 +177,63 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/services">Services</a>
                     </li>
-                </ul>
-                <ul class="navbar-nav"> 
                     <li class="nav-item">
-                        <a class="nav-link" href="/login">Login</a>
+                        <a class="nav-link" href="#">Services</a>
+                    </li>
+        
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Login</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-	
+	<!--Carosel section-->
 
-    <!--Hero Section -->
+	<div id="hospitalCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#hospitalCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#hospitalCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#hospitalCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="C:\Users\ADMIN\Desktop\CK Hospital\c1.jpg" class="d-block w-100 carousel-img" alt="Hospital Front">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Modern Infrastructure</h5>
+        <p>State-of-the-art equipment and clean environment.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="C:\Users\ADMIN\Desktop\CK Hospital\c2.jpg" class="d-block w-100 carousel-img" alt="Doctors">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Professional Doctors</h5>
+        <p>Qualified staff with experience in every department.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src= class="d-block w-100 carousel-img" alt="Emergency Care">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>24/7 Emergency</h5>
+        <p>Immediate care available anytime, day or night.</p>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#hospitalCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#hospitalCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
+
+    <!-- Hero Section 
     <div class="hero-section">
         <div class="hero-content">
             <h1>Welcome to CK Hospital</h1>
