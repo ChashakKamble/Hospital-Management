@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard - CK Hospital</title>
+
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <nav>
+        <h1>Admin Dashboard</h1>
+        <h2>welcome :<%= user.username %></h2>
+        <a href="#" >Log Out</a>
+    </nav>
+  <main>
+    <section class="admin-menu">
+        <h4> Admin Panel</h4>
+
+    <strong>Doctor</strong>
+    <button   onclick="showForm('addDoc')">Add Doctor</button>
+    <button   onclick="showForm('viewDoc')">View Doctors</button>
+
+    <strong>Receptionist</strong>
+    <button   onclick="showForm('addReceptionist')">Add Receptionist</button>
+    <button   onclick="showForm('viewReceptionist')">View Receptionists</button>
+
+    <button href="#" class="btn btn-danger w-100 mt-5"><i class="bi bi-box-arrow-right"></i> Logout</button>
+    </section>
+    <section class="form-win">
+        <div id="default-view"  >
+            <div class="card">
+                <strong>
+                    Total Doctors 
+                </strong>
+                <strong class="number">
+                    <br> 13
+                </strong>
+            </div>
+            <div class="card">
+                <strong>
+                    Total Patient 
+                </strong>
+                <strong class="number">
+                    <br> 50
+                </strong>
+            </div>
+            <div class="card">
+                <strong>
+                    Total Receptionist
+                </strong>
+                <strong class="number">
+                    <br> 2
+                </strong>
+            </div>
+        </div>
+        <div id="addDoc" class="form-container"   >
+            <h2>Doctor Registration Form</h2>
+            <form action="/registerDoctor" method="POST">
+                <label for="name">Name:</label>
+                <input type="text"  name="name" required>
+                <label for="email">Email:</label>
+                <input type="text"  name="email" required>
+                <label for="contact">Contact:</label>
+                <input type="text"  name="contact" required>
+                <label for="role">Role:</label>
+                <input type="text"  name="role" value="Doctor" required>
+                <label for="speci">Specialization:</label>
+                <input type="text"  name="speci" required>
+                <label for="exp">Experience:</label>
+                <input type="text"  name="exp" required>
+                <label for="status">Status:</label>
+                <input type="text"  name="status" required>
+
+                <input type="submit" value="Add Doctor" >
+            </form>
+        </div>
+        <div id="viewDoc" >
+            <h2>View Doctors</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Contact</th>
+                        <th>Specialization</th>
+                        <th>Experience</th>
+                        <th>Status</th>
+                        <th>Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% doctors.forEach(function(doctor) { %>
+                    <tr>
+                        <td><%= doctor.doctor_name %></td>
+                        <td><%= doctor.doctor_email %></td>
+                        <td><%= doctor.doctor_contact %></td>
+                        <td><%= doctor.doctor_specialization %></td>
+                        <td><%= doctor.doctor_experience %></td>
+                        <td><%= doctor.status %></td>
+                        <td>
+                            <button onclick="showForm('updateDoc', '<%= doctor.doctor_id %>')">Update</button>
+                        </td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+
+        </div>
+        <div id="addRec" style="display: none;"></div>
+        <div id="viewRec" style="display: none;"></div>
+    </section>
+  </main>
+  <% if(typeof message !== 'undefined' && message!=="") { %>
+    <script>
+      alert('<%= message %>');
+    </script>
+  <% } %>
+  <script type="text/javascript" src="./index.js"></script>
+</body>
+</html>
+

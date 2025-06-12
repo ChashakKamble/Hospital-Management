@@ -1,7 +1,7 @@
 create database HospitalManagement;
 use HospitalManagement;
 
-create table Users (user_id int primary key auto_increment,username varchar(50) not null,password varchar(100) not null, role enum("Admininstrator","Doctor","Receprtion")); 
+create table Users (user_id int primary key auto_increment,username varchar(50) not null,password varchar(100) not null, role enum("Admin","Doctor","Reception")); 
 create table admins( admin_id  int primary key auto_increment, admin_contact varchar(30) not null, user_id int , foreign key(user_id) references users(user_id));
 create table Doctors (doctor_id int primary key auto_increment, doctor_name varchar(40) not null, doctor_specialization varchar(15), doctor_experience int , status varchar(20), user_id int , admin_id int , foreign key(user_id) references users(user_id),foreign key(admin_id) references admins(admin_id));
 create table Reception(reception_id int primary key auto_increment, reception_name varchar(30) not null, reception_contact varchar(20) not null, status varchar(20), user_id int , admin_id int,foreign key(user_id) references users(user_id),foreign key(admin_id) references admins(admin_id));

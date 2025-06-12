@@ -1,0 +1,10 @@
+refere this while creting the forms in the project
+
+
+for user registration 
+    {
+    "username":"admin",
+    "pass":"admin",
+    "role":"Admininstrator"
+    }
+

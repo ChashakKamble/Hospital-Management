@@ -1,0 +1,207 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;         
+}
+body{
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #6dd5fa, #ffffff);
+}
+nav{
+
+    color: rgb(59, 57, 57);
+    padding: 10px 20px;
+    height: 10vh;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 10px 5%;
+    border-bottom: 5px solid #6dd5fa;
+}
+section{
+    padding: 20px;
+    height:90vh;
+    border-left: 5px solid #6dd5fa;
+}
+main{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+}
+.admin-menu{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding:2%;
+    width: 25%;
+}
+.admin-menu h4{
+    font-size: 30px;
+    text-align: center;
+}
+.admin-menu strong{
+    font-size: 25px;
+    text-align: left;
+    margin:10px 0
+    
+}
+.admin-menu button{
+   
+    color: black;
+    font-size: 20px;
+    padding: 10px;
+    width:100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+    border:none;
+    background-color: transparent;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+.admin-menu button:hover{
+     background-color: azure;
+}
+.form-win{
+    height: 90vh;
+    width:75%;
+    padding:20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y:scroll;
+}
+
+#default-view , #addDoc{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:10px;  
+}
+.form-win > div{
+    height: 90vh;
+}
+.card{
+    width:20%;
+    height:30%;
+   background-color: rgba(255, 255, 255, 0.263);
+    padding: 25px;
+    text-align: center ;
+}
+.card strong{
+    font-size: 20px;
+    color: black;
+}
+strong.number{
+    font-size: 65px;
+    color: rgba(68, 66, 66, 0.352);
+}
+#addDoc{
+    flex-direction: column;
+    align-items: center;
+    display: none;
+}
+#addDoc form{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+   
+}
+#addDoc form input{
+    padding: 10px;
+    border: 1px solid #6dd5fa;
+    border-radius: 5px;
+    outline: none;
+}
+#addDoc form label{
+    font-size: 20px;
+    color: black;
+    font-weight: 500;
+}
+
+#viewDoc{
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    
+    align-items: center;
+}
+.pagination {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.pagination button {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+}
+
+.pagination button.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.pagination button:disabled {
+  background-color: #eee;
+  cursor: not-allowed;
+}
+
+#viewDoc {
+ 
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: #f9f9f95f;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#viewDoc h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+#viewDoc table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#viewDoc th, #viewDoc td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+#viewDoc th {
+  background-color: #007bff;
+  color: white;
+}
+
+#viewDoc tr:hover {
+  background-color: #f1f1f1;
+}
+
+#viewDoc button {
+  padding: 6px 12px;
+  background-color: #28a745;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#viewDoc button:hover {
+  background-color: #218838;
+}
+
