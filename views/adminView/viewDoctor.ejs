@@ -2,31 +2,37 @@
 <main>
     <%- include("./adminSideBar.ejs") %>
 <section class="form-win">
-        <div id="default-view"  >
-            <div class="card">
-                <strong>
-                    Total Doctors 
-                </strong>
-                <strong class="number">
-                    <br> 13
-                </strong>
-            </div>
-            <div class="card">
-                <strong>
-                    Total Patient 
-                </strong>
-                <strong class="number">
-                    <br> 50
-                </strong>
-            </div>
-            <div class="card">
-                <strong>
-                    Total Receptionist
-                </strong>
-                <strong class="number">
-                    <br> 2
-                </strong>
-            </div>
+        <div id="viewDoc" >
+            <h2>View Doctors</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Contact</th>
+                        <th>Specialization</th>
+                        <th>Experience</th>
+                        <th>Status</th>
+                        <th>Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% doctors.forEach(function(doctor) { %>
+                    <tr>
+                        <td><%= doctor.doctor_name %></td>
+                        <td><%= doctor.doctor_email %></td>
+                        <td><%= doctor.doctor_contact %></td>
+                        <td><%= doctor.doctor_specialization %></td>
+                        <td><%= doctor.doctor_experience %></td>
+                        <td><%= doctor.status %></td>
+                        <td>
+                            <a href="/getDoctor/?id=<%= doctor.doctor_id %>">Update</a>
+                        </td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+
         </div>
     </section>
 </main>

@@ -58,3 +58,14 @@ exports.authenticateUser=async(username,role)=>{
         })
     });
 }
+
+exports.updateUser=async(userId,username,pass)=>{
+    return new Promise((resp,reject)=>{
+        db.query("update users set username = ?, password = ? where user_id = ?",[username,pass,userId],(err,res)=>{
+            if(err)
+                reject("Error while updating user : "+err)
+            else
+                resp(res);
+        })
+    });
+}

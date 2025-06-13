@@ -1,14 +1,41 @@
 let userService = require("../Services/userService");
 let userSer =new userService();
 let doctorService = require("../Services/doctorService");
+let jwt=require("jsonwebtoken");
+const secretKey = "this_is_a_secret_key"; // Use a secure key in production
 const con = require("../config/db");
 let doctorSer = new doctorService();
 exports.homePage = (req, res) => {
     res.render("home");
 }
 
-exports.loginPage = (req, res) => {
-    res.render("login",{message: ""});
+exports.loginPage = async (req, res) => {
+    let userToken = req.cookies.userToken;
+    if(!userToken){
+        res.render("login",{message: ""});
+        return;
+    }else{
+        // Verify the JWT token
+        jwt.verify(userToken, secretKey,async (err, decoded) => {
+            if (err) {
+                console.error("JWT verification error:", err);
+                res.render("login", { message: "Session expired. Please log in again." });
+            } else {
+                req.session.admin=decoded;
+                // If token is valid, redirect to the appropriate dashboard
+                if (decoded.role === "Admin") {
+                  res.redirect("/adminDash");
+                } else if (decoded.role === "Doctor") {
+                    res.redirect("/doctorDash");
+                } else if (decoded.role === "Reception") {
+                    res.redirect("/receptionDash");
+                } else {
+                    res.render("login", { message: "Invalid role." });
+                }
+            }
+        });
+    }
+
 }
 
 exports.addUser = async (req, res) => {
@@ -30,10 +57,17 @@ exports.authenticateUser = async (req, res) => {
     let { username, pass, role } = req.body;
     let result = await userSer.authenticateUser(username, pass, role);
     if (typeof result === "object") {
-        req.session.userId = result.user_id; // Store user ID in session
+        // Generate JWT token
+        let user={...result};
+        const token = jwt.sign(user, secretKey, { expiresIn: '24h' });
+        // Store the token in a cookie
+        res.cookie("userToken", token, {
+            httpOnly: true,
+            maxAge: 24 * 60 * 60 * 1000 ,// 24 hours
+             });
+        req.session.admin = user; // Store user in session
         if (role === "Admin") {
-            let allDocs=await doctorSer.getDoctors();
-            res.render("adminDash",{user:result,message:"",doctors:allDocs});
+           res.redirect("/adminDash");
             return;
         } else if (role === "Doctor") {
             res.render("doctorDash");
@@ -54,14 +88,15 @@ exports.authenticateUser = async (req, res) => {
 
 exports.registerDoctor = async (req, res) => {
     let { name, email, contact, speci, exp, status } = req.body;
-    let adminUserid =req.session.userId; // assuming adminid is stored in session
-    console.log("session id ",req.session.userId);
-    let admin=await userSer.getAdmin(adminUserid);
-    console.log("Admin ID:", admin);
-    let result = await doctorSer.registerDoctor(name, email, contact, speci, exp, status, admin.admin_id);
+    // use token to get the admin id
+     // assuming adminid is stored in session
+
+   // let admin=await userSer.getAdmin(adminUserid);
+  //  console.log("Admin ID:", admin);
+    let result = await doctorSer.registerDoctor(name, email, contact, speci, exp, status, null);
     if (typeof result === "object" && result.affectedRows > 0) {
-        let allDocs = await doctorSer.getDoctors();
-        res.render("adminDash", {user:admin,doctors:allDocs, message: "Doctor registered successfully!" });
+       req.session.successMessage = "Doctor registered successfully!";
+        res.redirect("/registerDoctor");
     } else if (typeof result === "string" && result.startsWith("Error")) {
         res.render("error", { message: result });
     }
@@ -69,7 +104,30 @@ exports.registerDoctor = async (req, res) => {
 
 
 
-//for logout 
-exports.logout=(req,res)=>{
-   
+exports.updateDoctor = async (req, res) => {
+    let { id, name, email, contact, speci, exp, status,uid } = req.body;
+   // uid is doctors user id 
+    console.log("Updating doctor with ID:", id);
+    let result = await doctorSer.updateDoctor(id, name, email, contact, speci, exp, status,uid);
+    if (typeof result === "object" && result.affectedRows > 0) {
+        req.session.successMessage = "Doctor updated successfully!";
+        res.redirect("/viewDoctor");
+    } else if (typeof result === "string" && result.startsWith("Error")) {
+        res.render("error", { message: result });
+    }
 }
+
+
+//for logout 
+exports.logout = (req, res) => {
+  // Destroy the session
+  req.session.destroy((err) => {
+    if (err) {
+      console.error("Session destroy error:", err);
+      return res.status(500).send("Unable to log out.");
+    }
+    res.clearCookie('connect.sid');
+    res.clearCookie('userToken'); 
+    res.redirect('/login');
+  });
+};
