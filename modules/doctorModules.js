@@ -14,6 +14,20 @@ exports.registerDoctor = async (name,email,contact, speci, exp , status,userid,a
     });
 }
 
+exports.getDoctor = async (id) => { 
+    return new Promise((resolve, reject) => {
+        db.query("SELECT * FROM doctors WHERE doctor_id=?", [id], (err, result) => {
+            if (err) {
+                reject("Error while getting doctor: " + err);
+            } else if (result.length === 0) {
+                resolve("No doctor found with the given ID.");
+            } else {
+                resolve(result);
+            }
+        });
+    });
+}
+
 exports.getDoctors=async()=>{
     return new Promise((resolve, reject) => {
         db.query("SELECT * FROM doctors", (err, result) => {

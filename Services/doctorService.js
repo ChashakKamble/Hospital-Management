@@ -17,6 +17,16 @@ class DoctorService extends userService {
             return "Error while registering doctor: " + err;
         }
     }
+
+    async getDoctor(id) {
+        try {
+            let result = await modules.getDoctor(id);
+            console.log("Doctor details: ", result); 
+            return result;
+        } catch (err) {
+            return "Error while getting doctor: " + err;
+        }
+    }
     async getDoctors() {
         try {
             let result = await modules.getDoctors();

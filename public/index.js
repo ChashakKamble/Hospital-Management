@@ -1,15 +1,12 @@
 
-// array for the list of form divs in admindashboard
-const admForms = ["default-view", "addDoc", "viewDoc"];
-const showForm = (formId) => {
-  // Hide all forms
-  admForms.forEach((form) => {
-    document.getElementById(form).style.display = "none";
-  });
-  // Show the selected form
-  document.getElementById(formId).style.display = "flex";
-}
 
+function loadUpdate(action, id) {
+    console.log("Action:", action, "ID:", id);
+    if (action === "update") {
+      console.log("Loading update page for ID:", id);
+      window.location.href = `/getDoctor/${id}`;
+    }
+  }
 
 document.addEventListener('DOMContentLoaded', function () {
     const rowsPerPage = 5;
