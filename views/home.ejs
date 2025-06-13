@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barai Hospital - Excellence in Healthcare</title>
+    <title>Chashak & Kundan - Excellence in Healthcare</title>
     <!-- Bootstrap 5 CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <!-- Bootstrap 5 JS Bundle -->
@@ -48,29 +48,33 @@
             margin-right: 20px;
             transition: 0.3s;
             cursor: pointer;
-            
+            position: relative;
             padding: 5px 0;
         }
 
        
-        
+        }
 
 		/* Fix carousel height and make it responsive */
-.carousel {
-    height: 90vh; /* Full screen height */
-    overflow: hidden;
-}
+		.carousel {
+		height: 50vh;
+		overflow: hidden;
+		}
 
-.carousel-inner,
-.carousel-item {
-    height: 100%;
-}
+		.carousel-inner {
+		height: 100%;
+		}
 
-.carousel-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures image scales without distortion */
-}
+		.carousel-item {
+		height: 100%;
+		}
+		
+
+		.carousel-item img {
+		height: 80vh;
+		width: 100%;
+		object-fit: cover;
+		}
 
       
 
@@ -162,23 +166,23 @@
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">CK Hospital</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav ms-auto"> 
                     <li class="nav-item">
-                        <a class="nav-link" href="#about">About Us</a>
+                        <a class="nav-link" href="/services">Services</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Services</a>
                     </li>
-                    
+        
                     <li class="nav-item">
-                        <a class="nav-link" href="/login">Login</a>
+                        <a class="nav-link" href="#">Login</a>
                     </li>
                 </ul>
             </div>
@@ -196,22 +200,22 @@
   
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="./doc_patient.png" class="d-block w-100" alt="Hospital Front">
-      <div class="carousel-caption d-none d-md-block ">
+      <img src="C:\Users\ADMIN\Desktop\CK Hospital\c1.jpg" class="d-block w-100 carousel-img" alt="Hospital Front">
+      <div class="carousel-caption d-none d-md-block">
         <h5>Modern Infrastructure</h5>
         <p>State-of-the-art equipment and clean environment.</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="./staff.png" class="d-block w-100" alt="Doctors">
-      <div class="carousel-caption d-none d-md-block text-black">
+      <img src="C:\Users\ADMIN\Desktop\CK Hospital\c2.jpg" class="d-block w-100 carousel-img" alt="Doctors">
+      <div class="carousel-caption d-none d-md-block">
         <h5>Professional Doctors</h5>
         <p>Qualified staff with experience in every department.</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="pic_3.jpg" class="d-block w-100" alt="Emergency Care">
-      <div class="carousel-caption d-none d-md-block text-black">
+      <img src= class="d-block w-100 carousel-img" alt="Emergency Care">
+      <div class="carousel-caption d-none d-md-block">
         <h5>24/7 Emergency</h5>
         <p>Immediate care available anytime, day or night.</p>
       </div>
@@ -228,17 +232,16 @@
 </div>
 
 
+
     <!-- Hero Section 
     <div class="hero-section">
-		
-		
         <div class="hero-content">
             <h1>Welcome to CK Hospital</h1>
             <p>Your Health, Our Priority. Providing Quality Care for Everyone.</p>
             <a href="#about">Learn More</a>
         </div>
     </div>
-	-->
+	
     <!-- About Us Section -->
     <section id="about" class="about-section">
         <div class="container">

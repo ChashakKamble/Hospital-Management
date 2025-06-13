@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Our Services - CK Hospital</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f2f5;
+            scroll-behavior: smooth;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: black;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar-brand {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .navbar-brand:hover,
+        .nav-link:hover {
+            color: #ffcc00 !important;
+        }
+
+        .nav-link {
+            color: #fff !important;
+            font-weight: 500;
+        }
+
+        .services-section {
+            padding: 100px 20px 60px;
+            background: #fff;
+        }
+
+        .services-section h2 {
+            color: #004080;
+            font-size: 40px;
+            margin-bottom: 40px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .service-card {
+            border: none;
+            border-radius: 20px;
+            padding: 35px;
+            background: linear-gradient(135deg, #ffffff 50%, #f4f7fc 50%);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            background-color: #f9f9f9;
+        }
+
+        .service-icon {
+            font-size: 50px;
+            color: #004080;
+            margin-bottom: 20px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            color: #ffcc00;
+            transform: scale(1.2);
+        }
+
+        .card-title {
+            color: #004080;
+            font-weight: 700;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .card-text {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .service-card:hover .card-text {
+            color: #004080;
+        }
+
+        .animated {
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Footer */
+        .footer {
+           /* background-color: #004080;*/
+		   background-color:black;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">Chashak & Kundan - Hospital</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/home">Home <i class="fas fa-home ml-1"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Services Section -->
+<div class="container services-section">
+    <h2>Our Services</h2>
+    <div class="row">
+
+        <div class="col-md-4 mb-4 animated">
+            <div class="service-card text-center">
+                <div class="service-icon"><i class="fas fa-ambulance"></i></div>
+                <h5 class="card-title">Emergency Care</h5>
+                <p class="card-text">24/7 emergency services with a dedicated team and advanced equipment for all urgent care needs.</p>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4 animated">
+            <div class="service-card text-center">
+                <div class="service-icon"><i class="fas fa-baby"></i></div>
+                <h5 class="card-title">Maternity Services</h5>
+                <p class="card-text">From prenatal care to postnatal support, we provide comprehensive maternity services for new and expectant mothers.</p>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4 animated">
+            <div class="service-card text-center">
+                <div class="service-icon"><i class="fas fa-user-md"></i></div>
+                <h5 class="card-title">Surgery</h5>
+                <p class="card-text">State-of-the-art surgical services in a variety of specialties, delivered by expert surgeons using advanced technology.</p>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4 animated">
+            <div class="service-card text-center">
+                <div class="service-icon"><i class="fas fa-child"></i></div>
+                <h5 class="card-title">Pediatrics</h5>
+                <p class="card-text">Comprehensive care for children including immunizations, well-baby checks, and treatment of childhood illnesses.</p>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4 animated">
+            <div class="service-card text-center">
+                <div class="service-icon"><i class="fas fa-vials"></i></div>
+                <h5 class="card-title">Diagnostics</h5>
+                <p class="card-text">Advanced diagnostic services including lab tests, imaging, and screenings for accurate and timely results.</p>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4 animated">
+            <div class="service-card text-center">
+                <div class="service-icon"><i class="fas fa-stethoscope"></i></div>
+                <h5 class="card-title">Outpatient Care</h5>
+                <p class="card-text">Convenient outpatient services for consultations, follow-up treatments, and routine check-ups.</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    &copy; 2025 CK Hospital. All rights reserved.
+</div>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

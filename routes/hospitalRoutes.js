@@ -7,6 +7,8 @@ const adminCtr=require("../controllers/adminControllers");
 routes.get("/",controller.homePage);
 // for loginpage
 routes.get("/login",controller.loginPage);
+// for Service page
+routes.get("/services",controller.servicePage);
 // for adding user
 routes.post("/addUser",controller.addUser);
 // for authenticating user
@@ -21,14 +23,23 @@ routes.get("/registerDoctor",adminCtr.docRegPage);
 routes.get("/viewDoctor",adminCtr.viewDoctor);
 routes.post("/registerDoctor",controller.registerDoctor);
 
-// for logout
-routes.get("/logout",controller.logout);
-
     // for getting  doctor
     routes.get("/getDoctor",adminCtr.getDoctor);
 //for update doctor
 routes.post("/updateDoctor",controller.updateDoctor);
 
-//for logout
+//for add Receptionist
+routes.post("/registerReception",controller.registerReception);
+
+//for update receptionist
+routes.post("/updateReception",controller.updateReception);
+
+//for view receptionist
+routes.get("viewRec",controller.viewRec);
+
+
+
+// for logout
 routes.get("/logout",controller.logout);
+
 module.exports=routes;

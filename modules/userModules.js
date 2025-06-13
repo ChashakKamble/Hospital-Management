@@ -53,6 +53,7 @@ exports.authenticateUser=async(username,role)=>{
             if(err){
                 reject("Error while authenticating user : "+err)
             }else{
+                console.log("user ",res);
                 responce(res[0]);
             }
         })

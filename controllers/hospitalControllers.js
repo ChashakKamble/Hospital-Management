@@ -38,6 +38,10 @@ exports.loginPage = async (req, res) => {
 
 }
 
+exports.servicePage = (req, res) =>{
+    res.render("services");
+}
+
 exports.addUser = async (req, res) => {
     let { username, pass, role } = req.body;
     let result = await userSer.addUser(username, pass, role);
@@ -56,6 +60,7 @@ exports.addUser = async (req, res) => {
 exports.authenticateUser = async (req, res) => {
     let { username, pass, role } = req.body;
     let result = await userSer.authenticateUser(username, pass, role);
+    console.log("cheking result ",result);
     if (typeof result === "object") {
         // Generate JWT token
         let user={...result};
@@ -87,13 +92,13 @@ exports.authenticateUser = async (req, res) => {
 }
 
 exports.registerDoctor = async (req, res) => {
-    let { name, email, contact, speci, exp, status } = req.body;
+    let { doctor_name, email, contact, doctor_specialization, doctor_experience, role, status } = req.body;
     // use token to get the admin id
      // assuming adminid is stored in session
 
    // let admin=await userSer.getAdmin(adminUserid);
   //  console.log("Admin ID:", admin);
-    let result = await doctorSer.registerDoctor(name, email, contact, speci, exp, status, null);
+    let result = await doctorSer.registerDoctor(doctor_name, email, contact, doctor_specialization, doctor_experience, role, status, null);
     if (typeof result === "object" && result.affectedRows > 0) {
        req.session.successMessage = "Doctor registered successfully!";
         res.redirect("/registerDoctor");
@@ -117,6 +122,35 @@ exports.updateDoctor = async (req, res) => {
     }
 }
 
+//register Reception
+exports.registerReception = async (req, res) => {
+    let { name, email, contact, role, status } = req.body;
+    // use token to get the admin id
+     // assuming adminid is stored in session
+
+   // let admin=await userSer.getAdmin(adminUserid);
+  //  console.log("Admin ID:", admin);
+    let result = await receptionSer.registerReception(name, email,contact, role, status, null);
+    if (typeof result === "object" && result.affectedRows > 0) {
+        let allRec = await receptionSer.getReception();
+        res.render("adminDash", {user:null,reception:allRec, message: "Reception registered successfully!" });
+    } else if (typeof result === "string" && result.startsWith("Error")) {
+        res.render("error", { message: result });
+    }
+}
+
+//update reception
+exports.updateReception = async (req, res) => {
+    let { reception_name, email, reception_contact, role, status,uid } = req.body;
+   // uid is doctors user id 
+    let result = await receptionSer.updateReception(reception_name, email, reception_contact, role, status,uid);
+    if (typeof result === "object" && result.affectedRows > 0) {
+        let allRec = await receptinSer.getReception();
+        res.render("adminDash", {user:result,message: "Reception updated successfully!",reception:allRes });
+    } else if (typeof result === "string" && result.startsWith("Error")) {
+        res.render("error", { message: result });
+    }
+}
 
 //for logout 
 exports.logout = (req, res) => {
