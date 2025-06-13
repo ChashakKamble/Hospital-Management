@@ -19,4 +19,7 @@ routes.post("/registerDoctor",controller.registerDoctor);
 // for logout
 routes.get("/logout",controller.logout);
 
+//for update doctor
+routes.post("/updateDoctor",controller.updateDoctor);
+
 module.exports=routes;

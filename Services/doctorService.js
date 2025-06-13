@@ -24,7 +24,19 @@ class DoctorService extends userService {
         } catch (err) {
             return "Error while getting doctors: " + err;
         }
-    }   
+    }  
+    
+    async updateDoctor(id, name,email,contact, speci, exp, status,user_id) {
+        console.log("Updating doctor with ID: ", id);
+        Promise.all([this.updateUser(user_id,email,contact),modules.updateDoctor(id, name,email,contact,speci, exp, status)])
+            .then((results) => {
+                console.log("Update results doctor: ", results);
+                return results;
+            })
+            .catch((err) => {
+                return "Error while updating doctor: " + err;
+            });
+    }
 }
 
 module.exports = DoctorService;
