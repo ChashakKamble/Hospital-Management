@@ -56,5 +56,19 @@ class UserService{
             return err;
         }
     }
+    async updateUser(userid,username,pass){
+        try{
+            let isUserTaken=await userModel.isUsernameTaken(username);
+            if(isUserTaken){
+                let hashPass=await bcrypt.hash(pass,salt);
+                let result=await userModel.updateUser(userid,username,hashPass);
+                return result;
+            }else{
+                return "Email Already Exits For Other User";
+            }
+        }catch(err){
+            return err;
+        } 
+    }
 }
 module.exports=UserService;

@@ -11,11 +11,6 @@ app.use(express.json());
 app.use(express.static("public"));
 app.use(express.urlencoded({extended:true}));
 app.use(cookie());
-app.use(session({
-    secret: 'MY Secret',
-    resave: false,
-    saveUninitialized: true,}));
-
 app.set("view engine",".ejs");
 app.use("/",routes);
 app.listen(process.env.PORT,()=>console.log("Server stated on port "+process.env.PORT));

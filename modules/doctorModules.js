@@ -25,3 +25,21 @@ exports.getDoctors=async()=>{
         });
     });
 }
+
+exports.updateDoctor = async ( id,name, email, contact, speci, exp, status) => {
+    console.log("query Updating doctor with ID: ", id);
+     return new Promise((resolve, reject) => {
+            db.query(
+                "UPDATE doctors SET doctor_name=?,doctor_email=?,doctor_contact=?, doctor_specialization=?, doctor_experience=?, status=? WHERE doctor_id=?",
+                [name,email,contact, speci,exp, status, id],
+                (err, result) => {
+                    if (err) {
+                        reject("Error while updating doctor: " + err);
+                    } else {
+                        console.log("Update result sccessful: ");
+                        resolve(result);
+                    }
+                }
+            );
+        });
+}
