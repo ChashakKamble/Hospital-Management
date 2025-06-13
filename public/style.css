@@ -99,24 +99,24 @@ strong.number{
     font-size: 65px;
     color: rgba(68, 66, 66, 0.352);
 }
-#addDoc{
+#addDoc,#updateDoc{
     flex-direction: column;
     align-items: center;
     display: none;
 }
-#addDoc form{
+#addDoc form, #updateDoc form{
     width: 40%;
     display: flex;
     flex-direction: column;
    
 }
-#addDoc form input{
+#addDoc form input , #updateDoc form input{
     padding: 10px;
     border: 1px solid #6dd5fa;
     border-radius: 5px;
     outline: none;
 }
-#addDoc form label{
+#addDoc form label, #updateDoc form label{
     font-size: 20px;
     color: black;
     font-weight: 500;

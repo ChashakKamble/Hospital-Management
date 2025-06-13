@@ -71,12 +71,5 @@ exports.registerDoctor = async (req, res) => {
 
 //for logout 
 exports.logout=(req,res)=>{
-    req.session.destroy((err) => {
-        if (err) {
-            console.error("Session destruction error:", err);
-            res.status(500).send("Internal Server Error : Unable to log out");
-        } else {
-            res.redirect("/login");
-        }
-    });
+   
 }
