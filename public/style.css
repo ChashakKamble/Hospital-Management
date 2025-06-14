@@ -191,7 +191,7 @@ strong.number{
   background-color: #f1f1f1;
 }
 
-#viewDoc button {
+#viewDoc .update , #viewDoc .delete {
   text-emphasis: none;
   padding: 6px 12px;
   background-color: #28a745;
@@ -202,7 +202,22 @@ strong.number{
   font-size: 14px;
 }
 
-#viewDoc button:hover {
+#viewDoc .update:hover {
   background-color: #218838;
+}
+#viewDoc .delete {
+  background-color: #dc3545;
+}
+#viewDoc .delete:hover {
+  background-color: #c82333;
+}
+#search {
+    width: 50%;
+    padding: 0.25em;
+    border: 1px solid #6dd5fa;
+    border-radius: 5px; 
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 20px;
 }
 

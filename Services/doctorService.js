@@ -10,7 +10,6 @@ class DoctorService extends userService {
         try {
             let user = await this.addUser(email,contact,"Doctor")
             let userid=user.insertId; // assuming userService has a user object with userid
-            console.log("User ID: "+ userid+" adminid "+adminid);
             let result = await modules.registerDoctor(name, email, contact, speci, exp, status, userid, adminid);
             return result;
         } catch (err) {
@@ -38,14 +37,13 @@ class DoctorService extends userService {
     
     async updateDoctor(id, name,email,contact, speci, exp, status,user_id) {
         console.log("Updating doctor with ID: ", id);
-        Promise.all([this.updateUser(user_id,email,contact),modules.updateDoctor(id, name,email,contact,speci, exp, status)])
-            .then((results) => {
-                console.log("Update results doctor: ", results);
-                return results;
-            })
-            .catch((err) => {
-                return "Error while updating doctor: " + err;
-            });
+        try{
+       const result=await Promise.all([this.updateUser(user_id,email,contact),modules.updateDoctor(id, name,email,contact,speci, exp, status)]);
+            console.log("Update result: ", result);
+            return result;
+        }catch (err) {
+            return "Error while updating doctor: " + err;
+        }
     }
 }
 

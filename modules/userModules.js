@@ -5,10 +5,8 @@ exports.isUsernameTaken=async(username)=>{
         db.query("select * from users where username = ?",[username],(err,res)=>{
             if(err)
                 reject("Error while checking the username Availability : "+err)
-            if(res.length==0)
-                responce(true);
             else
-                responce(false);
+                responce(res);
         })
     });
 }
@@ -60,12 +58,29 @@ exports.authenticateUser=async(username,role)=>{
 }
 
 exports.updateUser=async(userId,username,pass)=>{
+    console.log("Updating user with ID: ", userId);
     return new Promise((resp,reject)=>{
         db.query("update users set username = ?, password = ? where user_id = ?",[username,pass,userId],(err,res)=>{
             if(err)
                 reject("Error while updating user : "+err)
-            else
+            else if(res.changedRows === 0  ) {
+                reject("unable to update user "); 
+            }else{
                 resp(res);
+            }
+        })
+    });
+}
+exports.deleteUser=async(userId)=>{
+    return new Promise((resp,reject)=>{
+        db.query("delete from users where user_id = ?",[userId],(err,res)=>{
+            if(err)
+                reject("Error while deleting user : "+err)
+            else if(res.affectedRows === 0){
+                reject("Unable to delete user");
+            }else{
+                resp(res);
+            }
         })
     });
 }

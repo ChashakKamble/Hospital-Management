@@ -21,7 +21,7 @@ exports.loginPage = async (req, res) => {
                 console.error("JWT verification error:", err);
                 res.render("login", { message: "Session expired. Please log in again." });
             } else {
-                req.session.admin=decoded;
+                req.session.cur_user=decoded;
                 // If token is valid, redirect to the appropriate dashboard
                 if (decoded.role === "Admin") {
                   res.redirect("/adminDash");
@@ -65,7 +65,7 @@ exports.authenticateUser = async (req, res) => {
             httpOnly: true,
             maxAge: 24 * 60 * 60 * 1000 ,// 24 hours
              });
-        req.session.admin = user; // Store user in session
+        req.session.cur_user = user; // Store user in session
         if (role === "Admin") {
            res.redirect("/adminDash");
             return;
@@ -88,12 +88,10 @@ exports.authenticateUser = async (req, res) => {
 
 exports.registerDoctor = async (req, res) => {
     let { name, email, contact, speci, exp, status } = req.body;
-    // use token to get the admin id
-     // assuming adminid is stored in session
-
-   // let admin=await userSer.getAdmin(adminUserid);
-  //  console.log("Admin ID:", admin);
-    let result = await doctorSer.registerDoctor(name, email, contact, speci, exp, status, null);
+    let adminUserid = req.session.cur_user.user_id; // Get the admin user ID from the session
+   let admin=await userSer.getAdmin(adminUserid);
+   let adminId = admin.admin_id; // Get the admin ID from the admin object
+    let result = await doctorSer.registerDoctor(name, email, contact, speci, exp, status, adminId);
     if (typeof result === "object" && result.affectedRows > 0) {
        req.session.successMessage = "Doctor registered successfully!";
         res.redirect("/registerDoctor");
@@ -109,14 +107,45 @@ exports.updateDoctor = async (req, res) => {
    // uid is doctors user id 
     console.log("Updating doctor with ID:", id);
     let result = await doctorSer.updateDoctor(id, name, email, contact, speci, exp, status,uid);
-    if (typeof result === "object" && result.affectedRows > 0) {
-        req.session.successMessage = "Doctor updated successfully!";
-        res.redirect("/viewDoctor");
-    } else if (typeof result === "string" && result.startsWith("Error")) {
-        res.render("error", { message: result });
-    }
+    console.log("Update result in cont: ", result);
+    Array.isArray(result) && result.length > 0 ? 
+        req.session.successMessage = "Doctor updated successfully!" : 
+        req.session.successMessage = "Error while updating doctor.";
+    res.redirect("/viewDoctor");
 }
 
+exports.deleteDoctor = async (req, res) => {
+    let userId = req.query.id;
+    console.log("Deleting user with ID:", userId);
+    try {
+        let result = await userSer.deleteUser(userId);
+        if (result.affectedRows > 0) {
+            req.session.successMessage = "User deleted successfully!";
+        } else {
+            req.session.successMessage = "No user found with the given ID.";
+        }
+        res.redirect("/viewDoctor");
+    } catch (err) {
+        console.error("Error while deleting user:", err);
+        res.render("error", { message: "Error while deleting user: " + err });
+    }
+}
+exports.deleteReception = async (req, res) => {
+    let userId = req.query.id;
+    console.log("Deleting user with ID:", userId);
+    try {
+        let result = await userSer.deleteUser(userId);
+        if (result.affectedRows > 0) {
+            req.session.successMessage = "User deleted successfully!";
+        } else {
+            req.session.successMessage = "No user found with the given ID.";
+        }
+        res.redirect("/viewReception");
+    } catch (err) {
+        console.error("Error while deleting user:", err);
+        res.render("error", { message: "Error while deleting user: " + err });
+    }
+}
 
 //for logout 
 exports.logout = (req, res) => {

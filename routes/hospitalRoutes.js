@@ -19,16 +19,18 @@ routes.get("/registerDoctor",adminCtr.docRegPage);
 // for registering doctor
 //for viewing all doctors
 routes.get("/viewDoctor",adminCtr.viewDoctor);
+
 routes.post("/registerDoctor",controller.registerDoctor);
 
-// for logout
-routes.get("/logout",controller.logout);
-
-    // for getting  doctor
-    routes.get("/getDoctor",adminCtr.getDoctor);
+// for getting  doctor
+routes.get("/getDoctor",adminCtr.getDoctor);
 //for update doctor
 routes.post("/updateDoctor",controller.updateDoctor);
+//for deleting doctor
+routes.get("/deleteDoctor",controller.deleteDoctor);
 
+//for deleting reception
+routes.get("/deleteReception",controller.deleteReception);
 //for logout
 routes.get("/logout",controller.logout);
 module.exports=routes;

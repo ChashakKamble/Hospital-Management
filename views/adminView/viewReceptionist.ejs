@@ -1,0 +1,40 @@
+<%- include("./adminNav.ejs") %>
+<main>
+    <%- include("./adminSideBar.ejs") %>
+<section class="form-win">
+        <div id="viewDoc" >
+            <h2>View Receptionists</h2>
+            <input type="text" id="search" placeholder="Search by name " onkeyup="searchRece(this)">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Contact</th>
+                        <th>Status</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% Receptionists.forEach(function(receptionist) { %>
+                    <tr>
+                        <td><%= receptionist.reception_name %></td>
+                        <td><%= receptionist.reception_email %></td>
+                        <td><%= receptionist.reception_contact %></td> 
+                        <td><%= receptionist.status %></td>
+                        <td>
+                            <a class="update" href="/getDoctor/?id=<%= receptionist.reception_id %>">Update</a>
+                        </td>
+                        <td>
+                            <a  class="delete" href="/deleteDoctor/?id=<%= receptionist.user_id %>">Delete</a>
+                        </td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+
+        </div>
+    </section>
+</main>
+<%- include("adminFooter") %>
