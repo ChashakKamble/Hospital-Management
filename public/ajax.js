@@ -27,4 +27,6 @@ function searchDoc( val){
             }
         }
     }
+    xhttp.open("GET", `/searchDoc?val=${val}`, true);
+    xhttp.send();
 } 

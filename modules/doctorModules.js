@@ -50,7 +50,7 @@ exports.updateDoctor = async ( id,name, email, contact, speci, exp, status) => {
                     if (err) {
                         reject("Error while updating doctor: " + err);
                     } else {
-                        console.log("Update result sccessful: ");
+                        console.log("Update result sccessful: ",result);
                         resolve(result);
                     }
                 }

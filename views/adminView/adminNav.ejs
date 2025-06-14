@@ -11,7 +11,7 @@
 
     <nav>
         <h1>Admin Dashboard</h1>
-        <h2>welcome :<%= user.username %></h2>
+        <h2>welcome :<%= cur_user ? cur_user.username : "Guest" %></h2>
         <a href="/logout" >Log Out</a>
     </nav>
 </body>

@@ -21,7 +21,7 @@ class UserService{
         try{
             let admin=await userModel.getAdmin(userid);
             if(admin){
-                return user;
+                return admin;
             }else{
                 return "Admin Not Found";
             }
@@ -59,7 +59,7 @@ class UserService{
     async updateUser(userid,username,pass){
         try{
             let isUserTaken=await userModel.isUsernameTaken(username);
-            if(isUserTaken){
+            if(isUserTaken.length===0 || (isUserTaken.length>0 && isUserTaken[0].user_id===userid)){
                 let hashPass=await bcrypt.hash(pass,salt);
                 let result=await userModel.updateUser(userid,username,hashPass);
                 return result;
@@ -70,5 +70,13 @@ class UserService{
             return err;
         } 
     }
+    async deleteUser(userid){
+        try{
+            let result=await userModel.deleteUser(userid);
+            return result;
+        }catch(err){
+            return err;
+        }
+    }   
 }
 module.exports=UserService;

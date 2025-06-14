@@ -19,7 +19,7 @@
                 <input type="text"  name="exp" value="<%= doctor.doctor_experience %>"   required>
                 <label for="status">Status:</label>
                 <input type="text"  name="status" value="<%= doctor.status %>" required>
-
+                <input type="hidden" name="uid" value="<%= doctor.user_id %>">
                 <input type="submit" value="Update Doctor" >
             </form>
         </div>
