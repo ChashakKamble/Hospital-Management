@@ -35,11 +35,6 @@ exports.loginPage = async (req, res) => {
             }
         });
     }
-
-}
-
-exports.servicePage = (req, res) =>{
-    res.render("services");
 }
 
 exports.addUser = async (req, res) => {
@@ -102,6 +97,23 @@ exports.registerDoctor = async (req, res) => {
     let result = await doctorSer.registerDoctor(doctor_name, email, contact, doctor_specialization, doctor_experience, role, status, null);
 =======
     let { name, email, contact, speci, exp, status } = req.body;
+
+     const errors = {};
+
+    // Simple validations
+    if (!name || name.trim() === '') errors.name = 'Name is required';
+    if (!email || email.trim() === '') errors.email = 'Email is required';
+    if (!contact || contact.trim() === '') errors.contact = 'Contact is required';
+    if (!speci || speci.trim() === '') errors.speci = 'Specialization is required';
+    if (!exp || exp.trim() === '') errors.exp = 'Experience is required';
+    if (!status || status.trim() === '') errors.status = 'Status is required';
+
+    if (Object.keys(errors).length > 0) {
+        // Send back old data and error messages
+       return res.render('adminView/registerDoctor', {name,email,contact,speci,exp,status,errors});
+    }
+
+
     let adminUserid = req.session.cur_user.user_id; // Get the admin user ID from the session
    let admin=await userSer.getAdmin(adminUserid);
    let adminId = admin.admin_id; // Get the admin ID from the admin object
@@ -174,23 +186,7 @@ exports.deleteDoctor = async (req, res) => {
         res.render("error", { message: "Error while deleting user: " + err });
     }
 }
-exports.deleteReception = async (req, res) => {
-    let userId = req.query.id;
-    console.log("Deleting user with ID:", userId);
-    try {
-        let result = await userSer.deleteUser(userId);
-        if (result.affectedRows > 0) {
-            req.session.successMessage = "User deleted successfully!";
-        } else {
-            req.session.successMessage = "No user found with the given ID.";
-        }
-        res.redirect("/viewReception");
-    } catch (err) {
-        console.error("Error while deleting user:", err);
-        res.render("error", { message: "Error while deleting user: " + err });
->>>>>>> backendWork
-    }
-}
+
 
 //for logout 
 exports.logout = (req, res) => {

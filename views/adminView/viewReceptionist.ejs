@@ -24,10 +24,10 @@
                         <td><%= receptionist.reception_contact %></td> 
                         <td><%= receptionist.status %></td>
                         <td>
-                            <a class="update" href="/getDoctor/?id=<%= receptionist.reception_id %>">Update</a>
+                            <a class="update" href="/admin/getReceptionist/?id=<%= receptionist.reception_id %>">Update</a>
                         </td>
                         <td>
-                            <a  class="delete" href="/deleteDoctor/?id=<%= receptionist.user_id %>">Delete</a>
+                            <a  class="delete" href="/admin/deleteReceptinist/?id=<%= receptionist.user_id %>">Delete</a>
                         </td>
                     </tr>
                     <% }); %>

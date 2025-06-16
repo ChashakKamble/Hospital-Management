@@ -14,6 +14,19 @@ exports.registerDoctor = async (name,email,contact, speci, exp , status,userid,a
     });
 }
 
+exports.searchDoc=async(val)=>{
+    
+    return new Promise((resolve,reject)=>{
+        db.query('select * from doctors where doctor_name like ?;',['%'+val+'%'],(err,res)=>{
+            if(err)
+                reject(err);
+            else
+                resolve(res);
+        })
+    })
+
+}
+
 exports.getDoctor = async (id) => { 
     return new Promise((resolve, reject) => {
         db.query("SELECT * FROM doctors WHERE doctor_id=?", [id], (err, result) => {

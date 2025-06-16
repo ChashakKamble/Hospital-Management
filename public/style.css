@@ -84,6 +84,12 @@ main{
 .form-win > div{
     height: 90vh;
 }
+.form-win span{
+  color:red;
+  font-size: 15px;
+  text-align: center;
+  font-style: italic;
+}
 .card{
     width:20%;
     height:30%;

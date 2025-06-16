@@ -35,6 +35,19 @@ class DoctorService extends userService {
         }
     }  
     
+    async searchDoc(val){
+        console.log("Searhing doctor for name like ",val);
+        try{
+            const result=await modules.searchDoc(val);
+            if(result)
+                return result;
+            else    
+                return "Unable to Search Doctors";
+        }catch(err){
+            return "Error While Searching Doctors : "+err;
+        }
+    }
+
     async updateDoctor(id, name,email,contact, speci, exp, status,user_id) {
         console.log("Updating doctor with ID: ", id);
         try{

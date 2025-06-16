@@ -21,6 +21,26 @@ class Reception extends UserService{
             return "Error while getting receptionist: " + err;
         }
     }
+
+    async getReceptionist(id){
+        try{
+            let result=await modules.getReceptionist(id);
+            console.log(result);
+            return result;
+        }catch(err){
+            return "Error While geting Receptionist data ";
+        }
+    }
+
+    async updateReceptionist(id,name,email,contact,status,userid,){
+        try{
+            let result= await Promise.all([this.updateUser(userid,email,contact),modules.updateReceptionist(id,name,email,contact,status)])
+            console.log("update Result for the Reccp: ",result);
+            return result;
+        }catch(err){
+            return err;
+        }
+    }
 }
 
 module.exports = Reception;

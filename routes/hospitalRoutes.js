@@ -32,7 +32,7 @@ routes.post("/updateDoctor",controller.updateDoctor);
 routes.get("/deleteDoctor",controller.deleteDoctor);
 
 //for deleting reception
-routes.get("/deleteReception",controller.deleteReception);
+//routes.get("/deleteReception",controller.deleteReception);
 //for logout
 routes.get("/logout",controller.logout);
 

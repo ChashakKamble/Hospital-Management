@@ -56,6 +56,7 @@ class UserService{
             return err;
         }
     }
+    
     async updateUser(userid,username,pass){
         try{
             let isUserTaken=await userModel.isUsernameTaken(username);
