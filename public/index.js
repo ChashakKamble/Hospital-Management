@@ -44,3 +44,18 @@ document.addEventListener('DOMContentLoaded', function () {
     showPage(1); // Show the first page
 });
 
+function deleteReception(id) {
+    fetch(`/api/admin/reception/${id}`, {
+        method: 'DELETE'
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        // Remove the deleted item from the UI
+        const row = document.getElementById(`row-${id}`);
+        if (row) row.remove();
+    })
+    .catch(error => {
+        console.error('Error deleting reception:', error);
+    });
+}

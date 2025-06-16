@@ -2,27 +2,41 @@
 <main>
     <%- include("./adminSideBar.ejs") %>
 <section class="form-win">
-        <div id="addDoc" class="form-container"   >
-            <h2>Doctor Registration Form</h2>
-            <form action="/registerDoctor" method="POST">
-                <label for="name">Name:</label>
-                <input type="text"  name="name" required>
-                <label for="email">Email:</label>
-                <input type="text"  name="email" required>
-                <label for="contact">Contact:</label>
-                <input type="text"  name="contact" required>
-                <label for="role">Role:</label>
-                <input type="text"  name="role" value="Doctor" required>
-                <label for="speci">Specialization:</label>
-                <input type="text"  name="speci" required>
-                <label for="exp">Experience:</label>
-                <input type="text"  name="exp" required>
-                <label for="status">Status:</label>
-                <input type="text"  name="status" required>
+        <div id="addDoc" class="form-container">
+    <h2>Doctor Registration Form</h2>
+    <form action="/registerDoctor" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" name="name" value="<%= typeof name !== 'undefined' ? name : '' %>" required>
+        <span class="error"><%= errors?.name || '' %></span>
 
-                <input type="submit" value="Add Doctor" >
-            </form>
-        </div>
+        <label for="email">Email:</label>
+        <input type="text" name="email" value="<%= typeof email !== 'undefined' ? email : '' %>" required>
+        <span class="error"><%= errors?.email || '' %></span>
+
+        <label for="contact">Contact:</label>
+        <input type="text" name="contact" value="<%= typeof contact !== 'undefined' ? contact : '' %>" required>
+        <span class="error"><%= errors?.contact || '' %></span>
+
+        <label for="role">Role:</label>
+        <input type="text" name="role" value="Doctor" readonly>
+        <span class="error"><%= errors?.role || '' %></span>
+
+        <label for="speci">Specialization:</label>
+        <input type="text" name="speci" value="<%= typeof speci !== 'undefined' ? speci : '' %>" required>
+        <span class="error"><%= errors?.speci || '' %></span>
+
+        <label for="exp">Experience:</label>
+        <input type="text" name="exp" value="<%= typeof exp !== 'undefined' ? exp : '' %>" required>
+        <span class="error"><%= errors?.exp || '' %></span>
+
+        <label for="status">Status:</label>
+        <input type="text" name="status" value="<%= typeof status !== 'undefined' ? status : '' %>" required>
+        <span class="error"><%= errors?.status || '' %></span>
+
+        <input type="submit" value="Add Doctor">
+    </form>
+</div>
+
     </section>
 </main>
 <%- include("adminFooter") %>

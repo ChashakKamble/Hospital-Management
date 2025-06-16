@@ -21,7 +21,7 @@ exports.docRegPage = (req, res) => {
     let mess=req.session.successMessage; 
     delete req.session.successMessage; // Clear the message after rendering  
     console.log("success message ", mess);
-    res.render("adminView/registerDoctor",{message:mess});
+    res.render("adminView/registerDoctor",{message:mess,errors:undefined});
 }
 
 exports.viewDoctor=async(req,res)=>{
@@ -43,6 +43,21 @@ exports.getDoctor = async (req, res) => {
     }
 }
 
+exports.searchDoc = async (req,res)=>{
+    let val = req.query.val;
+    try{
+        let result=await doctorSer.searchDoc(val);
+        console.log("the result of searchDoc ",result);
+        if(typeof result==="object" ){
+            res.send(result);
+        }else{
+            let allDocs = await doctorSer.getDoctors();
+            res.render("adminView/viewDoctor",{doctors:allDocs,message:"Error While Searching data"});
+        }
+    }catch(err){
+        res.render
+    }
+}
 // there are some controllers that are needes to put here like
 // createDoctor, updateDoctor, deleteDoctor, etc.
 
@@ -50,6 +65,7 @@ exports.getDoctor = async (req, res) => {
 
 
 // controller for recieptionist
+
 exports.receptionistPage = (req, res) => {
     let mess = req.session.successMessage;
     delete req.session.successMessage; // Clear the message after rendering
@@ -75,7 +91,59 @@ exports.getAllReceptionist = async (req, res) => {
     delete req.session.successMessage;
     if (typeof result === "object" && result.length > 0) {
         res.render("adminView/viewReceptionist", { Receptionists: result, message: mess });
+    }else if(typeof result === "object" && result.length ===0) {
+         res.render("adminView/viewReceptionist", { Receptionists: result, message:"No Receptionist Working Right Now" });
     } else if (typeof result === "string" && result.startsWith("Error")) {
         res.render("error", { message: result });
+    }else{
+        res.status(500).render("error", { message: "Internal Server Error" });
+    }
+}
+
+exports.deleteReception = async (req, res) => {
+    let userId = req.query.id;
+    console.log("Deleting user with ID:", userId);
+    try {
+        let result = await userSer.deleteUser(userId);
+        if (result.affectedRows > 0) {
+            req.session.successMessage = "User deleted successfully!";
+        } else {
+            req.session.successMessage = "No user found with the given ID.";
+        }
+        res.redirect("/admin/receptions");
+    } catch (err) {
+        console.error("Error while deleting user:", err);
+        res.render("error", { message: "Error while deleting user: " + err });
+    }
+}
+
+exports.getReceptionist=async(req,res)=>{
+    let id=req.query.id;
+    try{
+        let result=await receptionSer.getReceptionist(id);
+        console.log("Receptinist returned data ",result);
+        if(typeof result ==="object" && result.length>0){
+            res.render("adminView/updateReceptionist",{receptionist:result[0],message:""});
+        }else if (typeof result === "string" && result.startsWith("Error")) {
+        res.render("error", { message: result });
+    }
+    }catch(err){
+        res.render("error",{message:"Internal Message Error"});
+    }
+
+}
+
+exports.updateReceptionist= async(req,res)=>{
+    let {id,name,email,contact,status,userId }=req.body;
+    console.log("updating reception for id ",id);
+
+    try{
+        let result=await receptionSer.updateReceptionist(id,name,email,contact,status,userId);
+        console.log(result);
+        Array.isArray(result) && result.length>0 ? req.session.successMessage="Receptionist Updated Successfully" :
+                req.session.successMessage="Error While Updating the Receptionist";
+        res.redirect("/admin/receptions");
+    }catch(err){
+        res.render("error",{message:"Internal Server Error"});
     }
 }
