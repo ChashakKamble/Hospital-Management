@@ -1,0 +1,41 @@
+<%- include("./receptionNav.ejs") %>
+<main>
+  <%- include("./receptionSidebar.ejs") %>
+  <section class="form-win">
+        <div id="viewDoc" >
+            <h2>View Receptionists</h2>
+            <input type="text" id="search" placeholder="Search by name " onkeyup="searchRece(this)">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sr.No</th>
+                        <th>Name</th>
+                        <th>Contact</th>
+                        <th>Shift</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% nurses.forEach(function(nurse,index) { %>
+                    <tr>
+                        <td><%= inedx+1%></td>
+                        <td><%= nurse.nurse_name %></td> 
+                        <td><%= nurse.nurse_contact %></td> 
+                        <td><%= nurse.nurse_shift %></td>
+                        <td>
+                            <button class="update" href="/admin/getReceptionist/?id=<%= nurse.nurse_id %>">Update</button>
+                        </td>
+                        <td>
+                            <button  class="delete" href="/admin/deleteReceptinist/?id=<%= nurse.nurse_id %>">Delete</button>
+                        </td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+
+        </div>
+
+  </section>
+</main>
+<%- include("receptionFooter") %>
