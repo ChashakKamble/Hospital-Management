@@ -14,8 +14,8 @@
             <strong>Type: <%= room.room_type %></strong>
             <strong>Charge: ₹<%= room.charge_per_day %></strong>
             <div class="btn-container">
-                <button class="btn-up" value="<%= room.room_id %>" onclick="updateRoom(this.value)">Update </button>
-                <button class="btn-del" value="<%= room.room_id %>" onclick="deleteRoom(this.value)">Delete</button>
+                <button class="update" value="<%= room.room_id %>" onclick="window.location.href='/reception/getRoomDetails/<%= room.room_id %>'">Update </button>
+                <button class="delete" value="<%= room.room_id %>" onclick="deleteRoom(this.value)">Delete</button>
             </div>
           </div>
           <% }}); %>

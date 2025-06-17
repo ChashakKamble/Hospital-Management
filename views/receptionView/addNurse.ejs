@@ -1,0 +1,37 @@
+<%- include("./receptionNav.ejs") %>
+<main>
+    <%- include("./receptionSidebar.ejs") %>
+<section class="form-win">
+        <div id="addDoc" class="form-container">
+    <h2>Doctor Registration Form</h2>
+   <form action="/reception/nurse" method="POST">
+    <label for="nurse_id">Nurse ID:</label>
+    <input type="text" name="nurse_id" value="<%= typeof nurse_id !== 'undefined' ? nurse_id : '' %>" required>
+    <span class="error"><%= errors?.nurse_id || '' %></span>
+
+    <label for="nurse_name">Nurse Name:</label>
+    <input type="text" name="nurse_name" value="<%= typeof nurse_name !== 'undefined' ? nurse_name : '' %>" required>
+    <span class="error"><%= errors?.nurse_name || '' %></span>
+
+    <label for="nurse_contact">Nurse Contact:</label>
+    <input type="text" name="nurse_contact" value="<%= typeof nurse_contact !== 'undefined' ? nurse_contact : '' %>" required>
+    <span class="error"><%= errors?.nurse_contact || '' %></span>
+
+    <label for="shift">Shift:</label>
+    <select name="shift" required>
+        <option value="">--Select Shift--</option>
+        <option value="Morning" <%= shift === 'Morning' ? 'selected' : '' %>>Morning</option>
+        <option value="Evening" <%= shift === 'Evening' ? 'selected' : '' %>>Evening</option>
+        <option value="Night" <%= shift === 'Night' ? 'selected' : '' %>>Night</option>
+    </select>
+    <span class="error"><%= errors?.shift || '' %></span>
+
+    <br>
+    <input type="submit" value="Register Nurse">
+</form>
+
+</div>
+
+    </section>
+</main>
+<%- include("receptionFooter") %>

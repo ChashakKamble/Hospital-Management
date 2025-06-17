@@ -1,0 +1,35 @@
+<%- include("./receptionNav.ejs") %>
+<main>
+    <%- include("./receptionSidebar.ejs") %>
+<section class="form-win">
+        <div id="addDoc" class="form-container">
+    <h2>Update Room Details</h2>
+    <form id="updateRoomForm">
+    <input type="hidden" id="roomId" value="<%= room?.room_id %>">
+
+    <label for="name">Room Number:</label>
+    <input type="text" id="roomNo" value="<%= room?.room_no || '' %>" required>
+    <span class="error"><%= errors?.roomNo || '' %></span>
+
+    <label for="type">Type:</label>
+    <select id="type" required>
+        <option value="">--Select Type--</option>
+        <option value="ICU" <%= room?.room_type === 'ICU' ? 'selected' : '' %>>ICU</option>
+        <option value="General Wards" <%= room?.roomtype === 'General Wards' ? 'selected' : '' %>>General Wards</option>
+        <option value="Deluxe" <%= room?.room_type === 'Deluxe' ? 'selected' : '' %>>Deluxe</option>
+        <option value="Super Deluxe" <%= room?.room_type=== 'Super Deluxe' ? 'selected' : '' %>>Super Deluxe</option>
+    </select>
+    <span class="error"><%= errors?.type || '' %></span>
+
+    <label for="contact">Charges:</label>
+    <input type="text" id="charge" value="<%= room?.charge_per_day || '' %>" required>
+    <span class="error"><%= errors?.charge || '' %></span>
+
+    <br>
+    <input type="submit" value="Update Room">
+</form>
+</div>
+
+    </section>
+</main>
+<%- include("receptionFooter") %>

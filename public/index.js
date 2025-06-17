@@ -1,5 +1,6 @@
 
 
+
 function loadUpdate(action, id) {
     console.log("Action:", action, "ID:", id);
     if (action === "update") {
@@ -60,8 +61,10 @@ function deleteReception(id) {
     });
 }
 
-// function to call the update rooms
-function  uodateRoom(val){
-    console.log(val);
-    
-}
+document.querySelectorAll('.dropdown-button').forEach(button => {
+  button.addEventListener('click', () => {
+    const dropdown = button.parentElement;
+    dropdown.classList.toggle('open');
+  });
+});
+

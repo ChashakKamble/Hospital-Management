@@ -1,13 +1,29 @@
 <section class="admin-menu">
-        <h4> Reception Panel</h4>
+  <h4>Reception Panel</h4>
 
-    <strong>Rooms</strong>
-    <a href="/reception/room">Add Rooms</a>
-    <a href="/reception/rooms">View Rooms</a>
+  <div class="dropdown">
+    <div class="dropdown-button">Rooms</div>
+    <div class="dropdown-content">
+      <a href="/reception/room">Add Room</a>
+      <a href="/reception/rooms">View Rooms</a>
+    </div>
+  </div>
 
-    <strong>Patient</strong>
-    <a href="/reception/"   >Add Patient</a>
-    <a href="/reception/"   >View Patient</a>
+  <div class="dropdown">
+    <div class="dropdown-button">Patient</div>
+    <div class="dropdown-content">
+      <a href="/reception/patient">Add Patient</a>
+      <a href="/reception/patients">View Patient</a>
+    </div>
+  </div>
 
-    <a class="logout" href="/logout"> Logout</a>
+  <div class="dropdown">
+    <div class="dropdown-button">Nurse</div>
+    <div class="dropdown-content">
+      <a href="/reception/nurse">Add Nurse</a>
+      <a href="/reception/nurses">View Nurses</a>
+    </div>
+  </div>
+
+  <a class="logout" href="/logout">Logout</a>
 </section>

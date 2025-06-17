@@ -1,0 +1,53 @@
+
+
+
+<%- include("./receptionNav.ejs") %>
+<main>
+    <%- include("./receptionSidebar.ejs") %>
+<section class="form-win">
+        <div id="addPatient" class="form-container"   >
+            <h2>Add Patient</h2>
+            <form action="/admin/reception" method="POST">
+			
+                <label for="name">Name:</label>
+                <input type="text"  name="name" required>
+				
+				<label for="age">Age:</label>
+                <input type="text"  name="age" required>
+				
+                <label for="gender">Gender:</label>
+                <input type="radio"  name="gender">
+  				<label for="male">Male</label><br>
+  				<input type="radio"  name="female" >
+  				<label for="female">Female</label><br>
+				
+                <label for="contact">Contact:</label>
+                <input type="text"  name="contact" required>
+				
+                <label for="issue">Issue:</label>
+                <input type="text"  name="issue" value="Issue" required>
+				
+				<label for="AdmitDate">Admit Date : </label>
+				<input type="date"  name="admitDate">
+				
+				<label for="AdmitDate">Discharge Date : </label>
+				<input type="date"  name="dischargeDate">
+				
+				<label for="roomNo">Room No</label>
+                <input type="text"  name="roomNo" required>
+				
+                <label for="nurse">Nurse ID</label>
+                <input type="text"  name="nurse" required>
+				
+				<label for="doctor">Doctor Id</label>
+                <input type="text"  name="doctor" required>
+			
+				<label for="status">Status:</label>
+                <input type="text"  name="status" required>
+				
+                <input type="submit" value="Add Patient" >
+            </form>
+        </div>
+    </section>
+</main>
+<%- include("receptionFooter") %>

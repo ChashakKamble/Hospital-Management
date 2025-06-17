@@ -1,0 +1,39 @@
+<%- include("./receptionNav.ejs") %>
+<main>
+    <%- include("./receptionSidebar.ejs") %>
+<section class="form-win">
+        <div id="addDoc" class="form-container">
+    <h2>Update Nurse Details</h2>
+   <form id="updateNurseForm">
+  <input type="hidden" id="nurseId" value="<%= nurse?.nurse_id || '' %>">
+
+  <label for="nurse_id">Nurse ID:</label>
+  <input type="text" id="nurse_id" value="<%= nurse?.nurse_id || '' %>" required>
+  <span class="error"><%= errors?.nurse_id || '' %></span>
+
+  <label for="nurse_name">Nurse Name:</label>
+  <input type="text" id="nurse_name" value="<%= nurse?.nurse_name || '' %>" required>
+  <span class="error"><%= errors?.nurse_name || '' %></span>
+
+  <label for="nurse_contact">Nurse Contact:</label>
+  <input type="text" id="nurse_contact" value="<%= nurse?.nurse_contact || '' %>" required>
+  <span class="error"><%= errors?.nurse_contact || '' %></span>
+
+  <label for="shift">Shift:</label>
+  <select id="shift" required>
+    <option value="">--Select Shift--</option>
+    <option value="Morning" <%= nurse?.shift === 'Morning' ? 'selected' : '' %>>Morning</option>
+    <option value="Evening" <%= nurse?.shift === 'Evening' ? 'selected' : '' %>>Evening</option>
+    <option value="Night" <%= nurse?.shift === 'Night' ? 'selected' : '' %>>Night</option>
+  </select>
+  <span class="error"><%= errors?.shift || '' %></span>
+
+  <br>
+  <input type="submit" value="Update Nurse">
+</form>
+
+</div>
+
+    </section>
+</main>
+<%- include("receptionFooter") %>
