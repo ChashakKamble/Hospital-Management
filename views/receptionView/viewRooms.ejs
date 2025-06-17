@@ -1,0 +1,28 @@
+<%- include("./receptionNav.ejs") %>
+<main>
+  <%- include("./receptionSidebar.ejs") %>
+  <section class="form-win">
+    <div class="room-sections">
+      <% let sections = ["ICU", "Deluxe", "Super Deluxe", "General Wards"]; %>
+      <% sections.forEach(section => { %>
+      <div class="room-section">
+        <h3><%= section %></h3>
+        <div class="room-list">
+          <% rooms.forEach(room => { if (room.room_type === section) { %>
+          <div class="room-card">
+            <strong>Room No: <%= room.room_no %></strong>
+            <strong>Type: <%= room.room_type %></strong>
+            <strong>Charge: ₹<%= room.charge_per_day %></strong>
+            <div class="btn-container">
+                <button class="btn-up" value="<%= room.room_id %>" onclick="updateRoom(this.value)">Update </button>
+                <button class="btn-del" value="<%= room.room_id %>" onclick="deleteRoom(this.value)">Delete</button>
+            </div>
+          </div>
+          <% }}); %>
+        </div>
+      </div>
+      <% }); %>
+    </div>
+  </section>
+</main>
+<%- include("receptionFooter") %>

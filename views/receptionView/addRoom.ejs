@@ -1,0 +1,33 @@
+<%- include("./receptionNav.ejs") %>
+<main>
+    <%- include("./receptionSidebar.ejs") %>
+<section class="form-win">
+        <div id="addDoc" class="form-container">
+    <h2>Doctor Registration Form</h2>
+    <form action="/reception/room" method="POST">
+        <label for="name">Room Number:</label>
+        <input type="text" name="roomNo" value="<%= typeof roomNo !== 'undefined' ? roomNo: '' %>" required>
+        <span class="error"><%= errors?.roomNo || '' %></span>
+
+        <label for="type">Type:</label>
+        <select name="type" id="" required>
+            <option value="">--Select Type--</option>
+            <option value="ICU">ICU</option>
+            <option value="General Wards">General Wards</option>
+            <option value="Deluxe">Deluxe</option>
+            <option value="Super Deluxe">Super Deluxe</option>
+        </select>
+        <span class="error"><%= errors?.type || '' %></span>
+
+        <label for="contact">Charges:</label>
+        <input type="text" name="charge" value="<%= typeof charge !== 'undefined' ? charge : '' %>" required>
+        <span class="error"><%= errors?.charge || '' %></span>
+
+        <br>
+        <input type="submit" value="Add Room">
+    </form>
+</div>
+
+    </section>
+</main>
+<%- include("receptionFooter") %>
