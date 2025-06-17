@@ -12,7 +12,7 @@ const db=require("../config/db")
 // doctor_id
 // status
 // check_status
-exports.addPatient= async(name,age,gender,contact,issue,admitionDate,roomNo,nurse,doctor){
+exports.addPatient= async(name,age,gender,contact,issue,admitionDate,roomNo,nurse,doctor)=>{
     return new Promise((resolve,reject)=>{
         db.query("insert into patient values (null,?,?,?,?,?,?,null,???,'Admitted',null)",[name,age,gender,contact,issue,admitionDate,roomNo,nurse,doctor],
             (err,res)=>{
@@ -23,5 +23,17 @@ exports.addPatient= async(name,age,gender,contact,issue,admitionDate,roomNo,nurs
             }
         )
 
+    });
+}
+
+exports.viewAllPatient=async ()=>{
+    return new Promise((resolve,reject)=>{
+        db.query("Select * from patient",(err,res)=>{
+            if(err){
+                reject(err)
+            }else{
+                resolve(res)
+            }
+        })
     });
 }

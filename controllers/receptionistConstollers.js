@@ -159,3 +159,4 @@ exports.searchNurse = async (req,res)=>{
         res.render("error",{message:err});   
     }
 }
+
