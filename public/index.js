@@ -59,3 +59,9 @@ function deleteReception(id) {
         console.error('Error deleting reception:', error);
     });
 }
+
+// function to call the update rooms
+function  uodateRoom(val){
+    console.log(val);
+    
+}

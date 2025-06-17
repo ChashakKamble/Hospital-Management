@@ -1,0 +1,60 @@
+
+const db=require("../config/db");
+
+exports.createRoom= async(roomNo,type, charge) =>{
+    return new Promise((resolve,reject)=>{
+        db.query("insert into rooms values (null,?,?,?)",[roomNo,type,charge],(err,res)=>{
+            if(err){
+                reject(err);
+            }else{
+                resolve(res);
+            }
+        })
+
+    });
+}
+
+exports.roomDetails= async (id)=>{
+    return new Promise((resolve,reject)=>{
+        db.query("select * from rooms where room_id = ?",[id],(err,res)=>{
+            if(err)
+                reject(err)
+            else
+                resolve(res);
+        });
+    })
+
+}
+exports.viewAllRooms = async ()=>{
+    return new Promise((resolve,reject)=>{
+        db.query("select * from rooms ",(err,res)=>{
+            if(err)
+                reject(err);
+            else
+                resolve(res);
+        })
+    })
+
+}
+
+exports.updateRoom=async (id,roomNo,type, charge)=>{
+    return new Promise((resolve,reject)=>{
+        db.query("update rooms set room_no=? , room_type = ? , charge_per_day=?  where room_id=?",[roomNo,type,charge,id],(err,res)=>{
+            if(err)
+                reject(err);
+            else
+                resolve(res);
+        })
+    })
+}
+
+exports.deleteRoom=async(id)=>{
+    return new Promise((resolve,reject)=>{
+        db.query("delete from rooms where room_id =?",[id],(err,res)=>{
+            if(err)
+                reject(err);
+            else 
+                resolve(res);
+        })
+    })
+}

@@ -36,7 +36,7 @@ main{
     padding:2%;
     width: 25%;
 }
-.admin-menu h4{
+.admin-menu h4,nav h1{
     font-size: 30px;
     text-align: center;
 }
@@ -61,7 +61,8 @@ main{
     transition: background-color 0.3s ease;
 }
 .admin-menu a:hover{
-     background-color: azure;
+     background-image:linear-gradient(to right,#4b95af,#6dd5fa);
+     color:azure;
 }
 .form-win{
     height: 90vh;
@@ -116,12 +117,13 @@ strong.number{
     flex-direction: column;
    
 }
-#addDoc form input , #updateDoc form input{ 
+#addDoc form input , #updateDoc form input ,#addDoc form select { 
     padding: 10px;
     border: 1px solid #6dd5fa;
     border-radius: 5px;
     outline: none;
 }
+
 #addDoc form label, #updateDoc form label{
     font-size: 20px;
     color: black;
@@ -132,7 +134,6 @@ strong.number{
     width: 100%;
     display: flex;
     flex-direction: column;
-    
     align-items: center;
 }
 .pagination {
@@ -195,6 +196,7 @@ strong.number{
 
 #viewDoc tr:hover {
   background-color: #f1f1f1;
+ 
 }
 
 #viewDoc .update , #viewDoc .delete {
@@ -211,11 +213,22 @@ strong.number{
 #viewDoc .update:hover {
   background-color: #218838;
 }
-#viewDoc .delete {
-  background-color: #dc3545;
+#viewDoc .delete  {
+  background-color: #f92237;
+  text-align: center;
+  color:whitesmoke;
 }
-#viewDoc .delete:hover {
-  background-color: #c82333;
+
+a.logout , nav a.logout {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border:3px solid #f92237;
+  text-align: center;
+  color: #f92237;
+}
+#viewDoc .delete:hover , .admin-menu a.logout:hover , nav a.logout:hover  {
+  background-color: #fe011a;
+  color:azure;
 }
 #search {
     width: 50%;
@@ -227,3 +240,45 @@ strong.number{
     margin-bottom: 20px;
 }
 
+.room-sections {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 20px;
+}
+
+.room-section h3 {
+  font-size: 24px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.room-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.room-card {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 2px solid #6dd5fa;
+  border-radius: 8px;
+  width: 200px;
+  height: 150px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.room-card strong {
+  font-size: 16px;
+    color: #33333385;
+}

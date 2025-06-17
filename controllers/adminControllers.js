@@ -20,7 +20,6 @@ exports.docRegPage = (req, res) => {
     
     let mess=req.session.successMessage; 
     delete req.session.successMessage; // Clear the message after rendering  
-    console.log("success message ", mess);
     res.render("adminView/registerDoctor",{message:mess,errors:undefined});
 }
 

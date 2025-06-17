@@ -28,7 +28,7 @@ exports.loginPage = async (req, res) => {
                 } else if (decoded.role === "Doctor") {
                     res.redirect("/doctorDash");
                 } else if (decoded.role === "Reception") {
-                    res.redirect("/receptionDash");
+                    res.redirect("/reception");
                 } else {
                     res.render("login", { message: "Invalid role." });
                 }
@@ -72,7 +72,7 @@ exports.authenticateUser = async (req, res) => {
             res.render("doctorDash");
             return ;
         } else if (role === "Reception") {
-            res.render("receptionDash");
+            res.redirect("/reception");
             return;
         }
        
