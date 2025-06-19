@@ -1,0 +1,48 @@
+<%- include("./receptionNav.ejs") %>
+<main>
+  <%- include("./receptionSidebar.ejs") %>
+  <section class="form-win">
+        <div id="viewDoc" >
+            <h2>View Patient</h2>
+            <input type="text" id="search" placeholder="Search by name " onkeyup="searchPatient(this)">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sr.No</th>
+                        <th>Name</th>
+                        <th>Contact</th>
+                        <th>Doctor</th>
+                        <th>Nurse</th>
+                        <th>Status</th>
+                        <th>Room No</th>
+                        <!-- <th>Update</th> -->
+                        <th>Generate Bill</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% patients.forEach(function(p,index) { %>
+                    <tr>
+                        <td><%= index+1%></td>
+                        <td><%= p.name %></td> 
+                        <td><%= p.contact %></td>
+                        <td><%= p.doctorName || 'N/A' %></td>
+                        <td><%= p.nurseName || 'N/A'%></td>
+                        <td><%= p.status %></td>
+                        <td><%= p.roomNo || 'N/A' %> </td> 
+                        
+                        <!-- <td>
+                            <button class="update" href="/admin/getReceptionist/?i=<%= p.id %>">Update</button>
+                        </td> -->
+                        <td>
+                            <a class="<%= p.checkStatus === 1 ? 'bill ' : 'bill disabled-link' %>" href="/reception/generate/<%= p.id %>">Generate Bil</a>
+                        </td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+
+        </div>
+
+  </section>
+</main>
+<%- include("receptionFooter") %>

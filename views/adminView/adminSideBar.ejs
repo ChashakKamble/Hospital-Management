@@ -1,13 +1,22 @@
  <section class="admin-menu">
         <h4> Admin Panel</h4>
 
-    <strong>Doctor</strong>
-    <a href="/registerDoctor"   >Add Doctor</a>
-    <a href="/viewDoctor">View Doctors</a>
 
-    <strong>Receptionist</strong>
-    <a href="/admin/reception"   >Add Receptionist</a>
+    <div class="dropdown">
+    <div class="dropdown-button">Doctor</div>
+    <div class="dropdown-content">
+      <a href="/registerDoctor"   >Add Doctor</a>
+    <a href="/viewDoctor">View Doctors</a>
+    </div>
+  </div>
+
+  <div class="dropdown">
+    <div class="dropdown-button">Receptionist</div>
+    <div class="dropdown-content">
+      <a href="/admin/reception"   >Add Receptionist</a>
     <a href="/admin/receptions"   >View Receptionists</a>
+    </div>
+  </div>
 
     <a class="logout" href="/logout"> Logout</a>
 </section>

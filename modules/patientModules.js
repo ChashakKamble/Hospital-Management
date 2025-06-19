@@ -14,7 +14,7 @@ const db=require("../config/db")
 // check_status
 exports.addPatient= async(name,age,gender,contact,issue,admitionDate,roomNo,nurse,doctor)=>{
     return new Promise((resolve,reject)=>{
-        db.query("insert into patient values (null,?,?,?,?,?,?,null,???,'Admitted',null)",[name,age,gender,contact,issue,admitionDate,roomNo,nurse,doctor],
+        db.query("insert into patient values (null,?,?,?,?,?,?,null,?,?,?,'Admitted',0)",[name,age,gender,contact,issue,admitionDate,roomNo,nurse,doctor],
             (err,res)=>{
                 if(err)
                     reject(err);
@@ -28,12 +28,69 @@ exports.addPatient= async(name,age,gender,contact,issue,admitionDate,roomNo,nurs
 
 exports.viewAllPatient=async ()=>{
     return new Promise((resolve,reject)=>{
-        db.query("Select * from patient",(err,res)=>{
+        db.query("Select * from patientinfo order by adddate desc",(err,res)=>{
             if(err){
                 reject(err)
             }else{
                 resolve(res)
             }
+        })
+    });
+}
+
+// for doctor useage queries
+exports.setChecked = async( id )=>{
+    return new Promise((resolve,reject)=>{
+        db.query("update patient set check_status=1 where patient_id=?",[id],(err,res)=>{
+            if(err)
+                reject(err);
+            else
+                resolve(res);
+        });
+    });
+}
+exports.setDischared= async(id)=>{
+    let date=new Date().getUTCDate(); 
+    return new Promise((resolve,reject)=>{
+        let date=new Date().getUTCDate(); 
+        db.query("update patient set status='Discharge',discharge_date=? where patient_id=?",[date,id],(err,res)=>{
+            if(err)
+                reject(err);
+            else
+                resolve(res);
+        })
+    });
+}
+exports.getAllocatedPatient = async(id)=>{
+    return new Promise((resolve,reject)=>{
+        db.query("select * from patient where doctor_id=? order by admitted_date desc",[id],(err,res)=>{
+            if(err){    
+                reject(err);
+        }else{
+                resolve(res);
+        }
+        })
+    })
+}
+
+exports.addmittedPatients = async(id)=>{
+    return new Promise((resolve,reject)=>{
+        db.query("select * from patient where status='admitted'and doctor_id=?",[id],(err,res)=>{
+            if(err)
+                reject(err)
+            else
+                resolve(res)
+        })
+    });
+}
+
+exports.dischagedPatients = async(id)=>{
+    return new Promise((resolve,reject)=>{
+        db.query("select * from patient where status='discharge' and doctor_id=?",[id],(err,res)=>{
+            if(err)
+                reject(err)
+            else
+                resolve(res)
         })
     });
 }

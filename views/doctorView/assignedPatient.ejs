@@ -1,0 +1,51 @@
+<%- include("./doctorNav.ejs") %>
+<main>
+    <%- include("./doctorSidebar.ejs") %>
+<section class="form-win">
+        <div id="viewDoc" >
+            <h2>View Patient</h2>
+            <input type="text" id="search" placeholder="Search by name " onkeyup="searchPatient(this)">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sr.No</th>
+                        <th>Name</th>
+                        <th>Age/Gender</th>
+                        <th>Contact</th>
+                        <th>Issue</th>
+                       
+                        <th>Status</th>
+                        <!-- <th>Update</th> -->
+                        <th>Generate Bill</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if(patients.length==0) { %>
+                        <tr><td colspan="6" style="text-align: center; color: gray; font-style: italic;">
+                            No Patient Available</td></tr>
+                    <% } %>   
+                    <% patients.forEach(function(p,index) { %>
+                    <tr>
+                        <td><%= index+1%></td>
+                        <td><%= p.patient_name %></td> 
+                        <td><%= p.patient_age +" / "+ p.patient_gender %></td>
+                        <td><%= p.patient_contact %></td>
+                        <td><%= p.patient_issue %></td>
+                        <td><%= p.status %></td>
+                        
+                        <!-- <td>
+                            <button class="update" href="/admin/getReceptionist/?i=<%= p.patient_id %>">Update</button>
+                        </td> -->
+                        <td>
+                            <a class="<%= p.check_status === 0 ? 'bill ' : 'bill disabled-link' %>" href="/doctor/setChecked/<%= p.patient_id %>" style="text-align: center;"><%= p.check_status === 0 ? 'Unchecked ' : 'Checked' %></a>
+                        </td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+
+        </div>
+
+  </section>
+</main>
+<%- include("doctorFooter") %>

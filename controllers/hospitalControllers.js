@@ -26,7 +26,11 @@ exports.loginPage = async (req, res) => {
                 if (decoded.role === "Admin") {
                   res.redirect("/adminDash");
                 } else if (decoded.role === "Doctor") {
-                    res.redirect("/doctorDash");
+                    // set the session varible 
+                    let doc=await doctorSer.getId(decoded.user_id);
+                    req.session.docId= doc.doctor_id;
+                    
+                    res.redirect("/doctor");
                 } else if (decoded.role === "Reception") {
                     res.redirect("/reception");
                 } else {
@@ -69,7 +73,9 @@ exports.authenticateUser = async (req, res) => {
            res.redirect("/adminDash");
             return;
         } else if (role === "Doctor") {
-            res.render("doctorDash");
+            let doc=await doctorSer.getId(user.user_id);
+            req.session.docId= doc.doctor_id;
+            res.redirect("/doctor");
             return ;
         } else if (role === "Reception") {
             res.redirect("/reception");
@@ -92,8 +98,13 @@ exports.registerDoctor = async (req, res) => {
 
     // Simple validations
     if (!name || name.trim() === '') errors.name = 'Name is required';
-    if (!email || email.trim() === '') errors.email = 'Email is required';
+    if (!email || email.trim() === ''){ 
+        errors.email = 'Email is required';
+    }else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errors.email = 'Invalid email format';
+    }
     if (!contact || contact.trim() === '') errors.contact = 'Contact is required';
+    if (!contact || !/^\d{10}$/.test(contact)) errors.contact = 'Valid 10-digit contact number is required';
     if (!speci || speci.trim() === '') errors.speci = 'Specialization is required';
     if (!exp || exp.trim() === '') errors.exp = 'Experience is required';
     if (!status || status.trim() === '') errors.status = 'Status is required';
@@ -105,8 +116,8 @@ exports.registerDoctor = async (req, res) => {
 
 
     let adminUserid = req.session.cur_user.user_id; // Get the admin user ID from the session
-   let admin=await userSer.getAdmin(adminUserid);
-   let adminId = admin.admin_id; // Get the admin ID from the admin object
+    let admin=await userSer.getAdmin(adminUserid);
+    let adminId = admin.admin_id; // Get the admin ID from the admin object
     let result = await doctorSer.registerDoctor(name, email, contact, speci, exp, status, adminId);
     if (typeof result === "object" && result.affectedRows > 0) {
        req.session.successMessage = "Doctor registered successfully!";

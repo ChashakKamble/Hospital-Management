@@ -4,50 +4,90 @@
 <%- include("./receptionNav.ejs") %>
 <main>
     <%- include("./receptionSidebar.ejs") %>
-<section class="form-win">
-        <div id="addPatient" class="form-container"   >
-            <h2>Add Patient</h2>
-            <form action="/admin/reception" method="POST">
-			
-                <label for="name">Name:</label>
-                <input type="text"  name="name" required>
-				
-				<label for="age">Age:</label>
-                <input type="text"  name="age" required>
-				
-                <label for="gender">Gender:</label>
-                <input type="radio"  name="gender">
-  				<label for="male">Male</label><br>
-  				<input type="radio"  name="female" >
-  				<label for="female">Female</label><br>
-				
-                <label for="contact">Contact:</label>
-                <input type="text"  name="contact" required>
-				
-                <label for="issue">Issue:</label>
-                <input type="text"  name="issue" value="Issue" required>
-				
-				<label for="AdmitDate">Admit Date : </label>
-				<input type="date"  name="admitDate">
-				
-				<label for="AdmitDate">Discharge Date : </label>
-				<input type="date"  name="dischargeDate">
-				
-				<label for="roomNo">Room No</label>
-                <input type="text"  name="roomNo" required>
-				
-                <label for="nurse">Nurse ID</label>
-                <input type="text"  name="nurse" required>
-				
-				<label for="doctor">Doctor Id</label>
-                <input type="text"  name="doctor" required>
-			
-				<label for="status">Status:</label>
-                <input type="text"  name="status" required>
-				
-                <input type="submit" value="Add Patient" >
-            </form>
-        </div>
+<section class="form-win ">
+       <div class="center-wrapper">
+  <div class="form-container">
+    <h2>Add Patient</h2>
+    <form action="/reception/patient" method="POST">
+  <div class="form-columns">
+
+    <!-- Left Column -->
+    <div class="form-column">
+      <label for="name">Name:</label>
+      <input type="text" name="name" value="<%= typeof name !== 'undefined' ? name : '' %>" required>
+      <span class="error"><%= errors?.name || '' %></span>
+
+      <label for="age">Age:</label>
+      <input type="text" name="age" value="<%= typeof age !== 'undefined' ? age : '' %>" required>
+      <span class="error"><%= errors?.age || '' %></span>
+
+      <label for="contact">Contact:</label>
+      <input type="text" name="contact" value="<%= typeof contact !== 'undefined' ? contact : '' %>" required>
+      <span class="error"><%= errors?.contact || '' %></span>
+
+      <label for="issue">Issue:</label>
+      <input type="text" name="issue" value="<%= typeof issue !== 'undefined' ? issue : '' %>" required>
+      <span class="error"><%= errors?.issue || '' %></span>
+
+      <label for="roomNo">Room No:</label>
+      
+      <select name="roomNo" id="roomNo" required>
+        <option value="">--Select Room--</option>
+       <% rooms.forEach(r => { %>
+          <option value="<%= r.room_id %>" <%= roomNo === r.room_id ? 'selected' : '' %>><%= r.room_no %></option>
+        <% }) %>
+      </select>
+      <span class="error"><%= errors?.roomNo || '' %></span>
+    </div>
+
+    <!-- Right Column -->
+    <div class="form-column">
+      <label for="gender">Gender:</label>
+      <select name="gender" required>
+        <option value="">--Select Gender</option>
+        <option value="Male" <%= gender === 'Male' ? 'selected' : '' %>>Male</option>
+        <option value="Female" <%= gender === 'Female' ? 'selected' : '' %>>Female</option>
+        <option value="Other" <%= gender === 'Other' ? 'selected' : '' %>>Other</option>
+      </select>
+      <span class="error"><%= errors?.gender || '' %></span>
+
+      <label for="admitDate">Admit Date:</label>
+      <input type="date" name="admitDate" value="<%= typeof admitDate !== 'undefined' ? admitDate : '' %>" required>
+      <span class="error"><%= errors?.admitDate || '' %></span>
+
+      <label for="nurse">Nurse:</label>
+      <select name="nurse" required>
+        <option value="">--Select Nurse--</option>
+        <% nurses.forEach(n => { %>
+          <option value="<%= n.nurse_id %>" <%= nurse === n.nurse_id ? 'selected' : '' %>><%= n.nurse_name %></option>
+        <% }) %>
+      </select>
+      <span class="error"><%= errors?.nurse || '' %></span>
+
+      <label for="doctor">Doctor:</label>
+      <select name="doctor" required>
+        <option value="">--Select Doctor--</option>
+        <% doctors.forEach(d => { %>
+          <option value="<%= d.doctor_id %>" <%= doctor == d.doctor_id ? 'selected' : '' %>><%= d.doctor_name %></option>
+        <% }) %>
+      </select>
+      <span class="error"><%= errors?.doctor || '' %></span>
+
+      <label for="status">Status:</label>
+      <select name="status" required>
+        <option value="Admitted" <%= status === 'Admitted' ? 'selected' : '' %>>Admitted</option>
+        <option value="Discharge" <%= status === 'Discharge' ? 'selected' : '' %>>Discharge</option>
+      </select>
+      <span class="error"><%= errors?.status || '' %></span>
+    </div>
+  </div>
+
+  <input type="submit" value="Add Patient">
+</form>
+
+  </div>
+</div>
+
     </section>
 </main>
 <%- include("receptionFooter") %>

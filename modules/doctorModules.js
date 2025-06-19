@@ -41,6 +41,17 @@ exports.getDoctor = async (id) => {
     });
 }
 
+exports.getId=async(uid)=>{
+    return new Promise((resolve,reject)=>{
+        db.query("select doctor_id from doctors where user_id=?",[uid],(err,res)=>{
+            if(err)
+                reject(err);
+            else    
+                resolve(res[0]);
+        })
+    });
+}
+
 exports.getDoctors=async()=>{
     return new Promise((resolve, reject) => {
         db.query("SELECT * FROM doctors", (err, result) => {

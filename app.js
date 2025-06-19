@@ -3,6 +3,7 @@ let cookieParser=require("cookie-parser");
 let routes=require("./routes/hospitalRoutes");
 let adminRoutes=require("./routes/adminRoute");
 let receptionRoutes=require("./routes/receptionistRoutes");
+let doctorRoutes=require("./routes/doctorRoute");
 require("dotenv").config();
 let conn=require("./config/db");
 const session = require("express-session");
@@ -31,5 +32,5 @@ app.set("view engine","ejs");
 app.use("/",routes);
 app.use("/admin",adminRoutes);
 app.use("/reception",receptionRoutes);
-
+app.use("/doctor",doctorRoutes);
 app.listen(process.env.PORT,()=>console.log("Server stated on port "+process.env.PORT));

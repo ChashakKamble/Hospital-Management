@@ -72,6 +72,7 @@ document.getElementById("updateRoomForm").addEventListener("submit",async functi
     }catch(err){
         console.log("the error is as follow : "+err);
         alert("unable to update room");
+        window.location.href="/reception/rooms";
     }
 
 });
@@ -93,3 +94,55 @@ async function deleteRoom(id){
         alert("Error While deleting room ");
     }
 }
+
+
+
+
+async function deleteNurse(id){
+    const response=await fetch("/reception/nurse/"+id,{
+        method:"delete"
+    });
+     try{
+        if(response){
+            window.location.href="/reception/nurses";
+            alert("Nurse Deleted Successfully");
+        }else{
+            alert("Unable To Delete Nurse");
+        }
+    }catch(err){
+        alert("Error While deleting Nurse ");
+    }
+}
+
+
+    alert("%%");
+    document.getElementById("updateNurseForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        console.log("initiating update");
+
+        let id = document.getElementById("nurseId").value;
+        let name = document.getElementById("nurseName").value;
+        let contact = document.getElementById("nurseContact").value;
+        let shift = document.getElementById("nurseShift").value;
+
+        try {
+            const response = await fetch("/reception/nurse/"+id, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ id, name, contact, shift })
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) throw new Error(result.message || "Failed to update");
+
+            alert("Nurse Details Updated Successfully");
+            window.location.href = "/reception/nurses";
+        } catch (err) {
+            console.error("Error updating nurse:", err);
+            alert("Unable to update nurse details");
+            window.location.href = "/reception/nurses";
+        }
+    });

@@ -1,0 +1,24 @@
+ <section class="admin-menu">
+        <h4> Doctor Panel</h4>
+
+
+    <div class="dropdown">
+    <div class="dropdown-button">Patient</div>
+    <div class="dropdown-content">
+      <a href="/doctor/patients/<%=docId%>"   >Assigned Patient </a>
+      <a href="/doctor/addmittedPatients/<%=docId%>">Admited Patients</a>
+      <a href="/doctor/dischargedPatients/<%=docId%>">Discharged Patients</a>
+      
+    </div>
+  </div>
+
+  <div class="dropdown">
+    <div class="dropdown-button">Medicine</div>
+    <div class="dropdown-content">
+      <a href="/"   >Add Medicine</a>
+    <a href="/"   >View Medicine</a>
+    </div>
+  </div>
+
+    <a class="logout" href="/logout"> Logout</a>
+</section>

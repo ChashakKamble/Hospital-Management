@@ -68,11 +68,39 @@ exports.searchDoc = async (req,res)=>{
 exports.receptionistPage = (req, res) => {
     let mess = req.session.successMessage;
     delete req.session.successMessage; // Clear the message after rendering
-    res.render("adminView/registerReceptionist", { message: mess });
+    res.render("adminView/registerReceptionist", {errors:undefined, message: mess });
 }
 exports.createReceptionist = async (req, res) => {
-    let { name, email, contact, status } = req.body;
-    
+  const { name, email, contact, role, status } = req.body;
+    const errors = {};
+
+    if (!name || name.trim() === '') {
+        errors.name = 'Name is required';
+    }
+    if (!email || email.trim() === '') {
+        errors.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errors.email = 'Invalid email format';
+    }
+
+    if (!contact || contact.trim() === '') {
+        errors.contact = 'Contact is required';
+    } else if (!/^\d{10}$/.test(contact)) {
+        errors.contact = 'Contact must be a 10-digit number';
+    }
+
+    if (!role || role.trim().toLowerCase() !== 'reception') {
+        errors.role = 'Role must be "Reception"';
+    }
+
+    if (!status || status.trim() === '') {
+        errors.status = 'Status is required';
+    }
+
+    if (Object.keys(errors).length > 0) {
+        return res.render('adminView/registerReceptionist', {errors,name,email,contact,role,status});
+    }
+
     let adminUserId = res.locals.cur_user.user_id// Get the admin ID from the admin object
     let admin = await userSer.getAdmin(adminUserId);
     let adminid = admin.admin_id; // Get the admin ID from the admin object

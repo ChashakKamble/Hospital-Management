@@ -19,7 +19,13 @@ receptionistRouter.get("/nurse",receptionistController.addNursePage);
 receptionistRouter.post("/nurse",receptionistController.createNurse);
 receptionistRouter.get("/nurses",receptionistController.listNurse);
 receptionistRouter.get("/getNurseDetails/:id",receptionistController.nurseDetails);
-receptionistRouter.put("/nurse/:id",receptionistController.updateNurse);
+receptionistRouter.post("/updateNurse",receptionistController.updateNurse);
 receptionistRouter.delete("/nurse/:id",receptionistController.deleteNurse);
+receptionistRouter.get("/searchNurse",receptionistController.searchNurse);
+
+//routes for patient management
+receptionistRouter.get("/patient",receptionistController.addPatientPage);
+receptionistRouter.post("/patient",receptionistController.createPatient);
+receptionistRouter.get("/patients",receptionistController.listPatient);
 
 module.exports=receptionistRouter;

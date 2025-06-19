@@ -17,6 +17,52 @@ class Patient {
             return err;
         }
     }
+
+    async  getAllocatedPatient(id){
+        try{
+            const result=await patiModel.getAllocatedPatient(id);
+            return result;
+        }catch(err){
+            return err;
+        }   
+    }
+
+    async setChecked(id){
+        try{
+            const result=await patiModel.setChecked(id);
+            return result;
+        }catch(err){
+            return err;
+        }
+    }
+
+    async setDischared(id){
+        try{
+            const result=await patiModel.setDischared(id);
+            return result;
+        }catch(err){
+            return err;
+        }
+    }
+
+    async addmittedPatient(id){
+        try{
+            const result=await patiModel.addmittedPatients(id);
+            return result;
+        }catch(err){
+            return err;
+        }
+    }
+
+    async dischagedPatient(id){
+        try{
+            const result=await patiModel.dischagedPatients(id);
+            return result;
+        }catch(err){
+            return err;
+        }
+    }
+
 }
 
 

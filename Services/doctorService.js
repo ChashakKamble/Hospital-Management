@@ -34,6 +34,15 @@ class DoctorService extends userService {
             return "Error while getting doctors: " + err;
         }
     }  
+
+    async getId(uid){
+        try{
+            const result=await modules.getId(uid);
+            return result;
+        }catch(err){
+            return "Error While Getting doctor id "+err;
+        }
+    }
     
     async searchDoc(val){
         console.log("Searhing doctor for name like ",val);

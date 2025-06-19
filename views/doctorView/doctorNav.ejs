@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CK Hospital</title>
+
+  
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <nav>
+        <h1>CK Hospital</h1>
+        <h2>welcome :<%= cur_user ? cur_user.username : "Guest" %></h2>
+        <a class="logout" href="/logout" >Log Out</a>
+    </nav>
+</body>
+</html>
