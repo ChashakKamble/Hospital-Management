@@ -1,4 +1,5 @@
 const modules = require('../modules/doctorModules');
+const patiModel=require("../modules/patientModules");
 const userService = require('./userService');
 
 class DoctorService extends userService {
@@ -58,13 +59,21 @@ class DoctorService extends userService {
     }
 
     async updateDoctor(id, name,email,contact, speci, exp, status,user_id) {
-        console.log("Updating doctor with ID: ", id);
+       
         try{
-       const result=await Promise.all([this.updateUser(user_id,email,contact),modules.updateDoctor(id, name,email,contact,speci, exp, status)]);
-            console.log("Update result: ", result);
+            const result=await Promise.all([this.updateUser(user_id,email,contact),modules.updateDoctor(id, name,email,contact,speci, exp, status)]);
             return result;
         }catch (err) {
             return "Error while updating doctor: " + err;
+        }
+    }
+
+    async addPriscription(id , note ,priscription){
+        try{
+            const result=await patiModel.addPriscription(id,note,priscription);
+            return result;
+        }catch(err){
+            return "Erroer while adding priscription"+err;
         }
     }
 }

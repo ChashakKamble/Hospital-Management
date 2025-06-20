@@ -2,7 +2,8 @@ const patient=require("../Services/patient");
 const patiSer=new patient();
 const medicine=require("../Services/medicine");
 const mediSer=new medicine();
-
+const doctor=require("../Services/doctorService");
+const doctorSer=new doctor();
 
 exports.doctorDefault=async(req,res)=>{
     res.render("doctorView/doctorDefault",{message:undefined,docId:req.session.docId});
@@ -76,7 +77,7 @@ exports.dischargedPatient= async(req,res)=>{
 exports.addMedicinePage=async(req,res)=>{
     let mess=req.session.successMessage;
     delete req.session.successMessage;
-    res.render("doctorView/addMedicine",{message:mess});
+    res.render("doctorView/addMedicine",{message:mess,docId:req.session.docId,errors:undefined});
 }
 
 exports.addMedicine=async(req,res)=>{
@@ -87,7 +88,7 @@ exports.addMedicine=async(req,res)=>{
         if(typeof result ==="object"){
           
             req.session.successMessage="Medicine added Succssfully";
-            res.redirect("/doctor/add")
+            res.redirect("/doctor/medicine");
         }else{
             res.render("error",{message:result});
         }
@@ -97,13 +98,15 @@ exports.addMedicine=async(req,res)=>{
 }
 
 exports.viewMedicine=async(req,res)=>{
+    console.log("get medicine is called");
     try{
+        console.log("its trying")
         const result=await mediSer.getMedicine();
         console.log("get medicine result ",result);
          if(typeof result ==="object"){
             let mess=req.session.successMessage;
             delete req.session.successMessage;
-            res.render("doctorView/viewMedicine",{message:mess});
+            res.render("doctorView/viewMedicine",{message:mess,medicine:result,docId:req.session.docId});
          }else{
             res.render("error",{message:result});
          }
@@ -112,4 +115,50 @@ exports.viewMedicine=async(req,res)=>{
     }
 }
 
+exports.priscriptionPage=async(req,res)=>{
+    let id=req.params.id;
+    try{
+        
+        const patient= await patiSer.getPatient(id); 
+         const result=await mediSer.getMedicine();
+         if(typeof result==="object")
+          res.render("doctorView/addPriscription",{message:undefined,patient:patient[0],medicines:result,docId:req.session.docId});
+         else
+            res.render("error",{message:result});
+    }catch(err){
+        res.render("error",{message:err});
+    }
+}
 
+exports.addPriscription = async (req, res) => {
+    try {
+        const { id,note, selectedMedicines } = req.body;
+        console.log('id is ',id);
+        // If no medicines were selected, selectedMedicines might be undefined
+        if (!selectedMedicines) {
+            return res.render("error", { message: "No medicines selected" });
+        }
+
+        // Convert to array if only one checkbox is checked (Express sends it as a string)
+        let selectedIds = Array.isArray(selectedMedicines)
+            ? selectedMedicines
+            : [selectedMedicines];
+
+        // Creating comma-separated string
+        const idString = selectedIds.join(',');
+
+        console.log("Note:", note);
+        console.log("Selected Medicine IDs (string):", idString);
+        const result=await doctorSer.addPriscription(id , note ,idString);
+        console.log("the result of adding priscription ",result);
+
+        if(typeof result==="object"){
+            req.session.successMessage="priscription added for patient";
+            res.redirect("/doctor/patients/"+req.session.docId);
+        }else{
+            res.render("error",{message:result});
+        }
+    } catch (err) {
+        res.render("error", { message: "Something went wrong "+err });
+    }
+};

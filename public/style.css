@@ -199,7 +199,7 @@ strong.number{
  
 }
 
-#viewDoc .update , #viewDoc .delete ,#addDoc .update ,.btn-container .update ,.btn-container .delete ,#viewDoc .bill {
+#viewDoc .update , #viewDoc .delete ,#addDoc .update ,.btn-container .update ,.btn-container .delete ,#viewDoc .bill ,.bill button {
   text-emphasis: none;
   padding: 6px 12px;
   background-color: #28a745;
@@ -477,4 +477,53 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
   background: #0056b3;
+}
+
+
+/* css for medicine view  */
+  .scrollable-box {
+  border: 1px solid #ccc;
+  padding: 10px;
+  width:100%;
+  max-height: 40vh; /* adjust as needed */
+  overflow-y: auto;
+  margin-top: 10px;
+}
+.medicine-checkbox input{
+  flex-basis: 20%;
+  height:20px ;
+}
+
+.medicine-checkbox {
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: flex-start ;
+  align-items: center;
+}
+
+/* for generate bill */
+.bill{
+  padding:20px;
+  border: 2px solid black;
+}
+.bill .hospital{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.bill .details{
+   display: flex;
+   margin:20px 0;
+}
+.bill >.section{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.bill .print{
+  padding:10px;
+  display: flex;
+  justify-content: center;
 }

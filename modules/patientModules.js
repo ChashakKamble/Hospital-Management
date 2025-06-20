@@ -26,6 +26,17 @@ exports.addPatient= async(name,age,gender,contact,issue,admitionDate,roomNo,nurs
     });
 }
 
+exports.getPatient=async(id)=>{
+    return new Promise((resolve,reject)=>{
+        db.query("select * from patient where patient_id=?",[id],(err,res)=>{
+            if(err)
+                reject(err);
+            else    
+                resolve(res);
+        })
+    })
+}
+
 exports.viewAllPatient=async ()=>{
     return new Promise((resolve,reject)=>{
         db.query("Select * from patientinfo order by adddate desc",(err,res)=>{
@@ -50,9 +61,9 @@ exports.setChecked = async( id )=>{
     });
 }
 exports.setDischared= async(id)=>{
-    let date=new Date().getUTCDate(); 
+    
     return new Promise((resolve,reject)=>{
-        let date=new Date().getUTCDate(); 
+        let date=new Date(); 
         db.query("update patient set status='Discharge',discharge_date=? where patient_id=?",[date,id],(err,res)=>{
             if(err)
                 reject(err);
@@ -69,6 +80,29 @@ exports.getAllocatedPatient = async(id)=>{
         }else{
                 resolve(res);
         }
+        })
+    })
+}
+
+exports.addPriscription = async(id,note,priscription)=>{
+    console.log("values are : "+id+" "+note+" "+priscription);
+    return new Promise((resolve,reject)=>{
+        db.query("update patient set note=? , priscription=? where patient_id=?",[note,priscription,id],(err,res)=>{
+            if(err)
+                reject(err);
+            else
+                resolve(res);
+        })
+    })
+}
+
+exports.getPriscription = async ( id )=>{
+    return new Promise((resolve,reject)=>{
+        db.query("select priscription  from patient where patient_id = ? ",[id],(err,res)=>{
+            if(err)
+                reject(err)
+            else
+                resolve(res);
         })
     })
 }

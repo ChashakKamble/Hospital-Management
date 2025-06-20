@@ -13,6 +13,7 @@ class Medicine{
     async getMedicine(){
         try{
             const result=await mediModule.getMedicine();
+            console.log("before return gm s ",result);
             return result;
         }catch(err){
             return err;

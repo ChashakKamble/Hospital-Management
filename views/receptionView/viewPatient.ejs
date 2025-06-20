@@ -34,7 +34,7 @@
                             <button class="update" href="/admin/getReceptionist/?i=<%= p.id %>">Update</button>
                         </td> -->
                         <td>
-                            <a class="<%= p.checkStatus === 1 ? 'bill ' : 'bill disabled-link' %>" href="/reception/generate/<%= p.id %>">Generate Bil</a>
+                            <a class="<%= p.checkStatus === 1 ? 'bill ' : 'bill disabled-link' %>" href="/reception/generateBill/<%= p.pid %>">Generate Bil</a>
                         </td>
                     </tr>
                     <% }); %>

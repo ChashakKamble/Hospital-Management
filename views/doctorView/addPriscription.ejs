@@ -1,0 +1,33 @@
+<%- include("./doctorNav.ejs") %>
+<main>
+    <%- include("./doctorSidebar.ejs") %>
+<section class="form-win">
+    <div id="addDoc" class="form-container">
+    <h2>Add Priscription </h2>
+    <h3>Patient Name : <%= patient.patient_name %></h3>
+       <form action="/doctor/addPriscription" method="POST">
+        <input type="hidden" name="id" value="<%= patient.patient_id %>">
+  <label for="note">Note:</label>
+  <input type="text" id="note" name="note" placeholder="Enter note..." required />
+
+  <div class="scrollable-box">
+    <% if (medicines && medicines.length > 0) { %>
+      <% medicines.forEach(function(med, index) { %>
+        <div class="medicine-checkbox">
+          <input type="checkbox" id="med_<%= index %>" name="selectedMedicines" value="<%= med.id %>" />
+          <label for="med_<%= index %>"><%= med.name %> - ₹<%= med.price %></label>
+        </div>
+      <% }) %>
+    <% } else { %>
+      <p>No medicines available.</p>
+    <% } %>
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
+    </div>
+
+</section>
+
+</main>
+<%- include("doctorFooter") %>

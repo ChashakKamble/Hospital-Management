@@ -28,4 +28,7 @@ receptionistRouter.get("/patient",receptionistController.addPatientPage);
 receptionistRouter.post("/patient",receptionistController.createPatient);
 receptionistRouter.get("/patients",receptionistController.listPatient);
 
+
+//bill generation
+receptionistRouter.get("/generateBill/:id",receptionistController.generateBill);
 module.exports=receptionistRouter;

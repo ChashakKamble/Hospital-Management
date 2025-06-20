@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Patient Bill</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 40px;
+      }
+      h2,h4 {
+        margin: 0;
+        text-align: center;
+      }
+      .hospital {
+        text-align: center;
+        border-bottom: 2px double black;
+        padding:10px;
+      }
+      .details{
+        display: flex;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      th,td {
+        padding: 8px 12px;
+        border: 1px solid #000;
+        text-align: left;
+      }
+      .no-border {
+        border: none;
+      }
+      .section {
+        margin-top: 20px;
+      }
+      .details .section{
+        width:50%;
+      }
+      .right {
+        text-align: right;
+      }
+      .bold {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hospital">
+      <h1>CK HOSPITAL</h1>
+      <h3>Address: CK Hospital, Karve Nagar, Pune,Maharastra, India </h3>
+      <i>Phone: +91 8956237423 | Email: contact@ckhospital.com <br />
+        Working Hours: Mon - Sat: 10 AM - 7 PM</i>
+    </div>
+    <div class="details">
+    <div class="section">
+      <h2>Patient Details:</h2>
+      <p><strong>Name:</strong> <%= patient.name %> </p>
+      <p>
+        <strong>Gender/Age:</strong>(<%= patient.gender%>) <%= patient.age %>
+        years
+      </p>
+      <p><strong>Contact:</strong><%= patient.contact %></p>
+      <p><strong>Issue:</strong><%= patient.issue %></p>
+      <p>
+        <strong>Consulting Doctor:</strong><%= patient.doctorName %>
+      </p>
+      <p><strong>Doctor Specialization</strong><%=patient.doctorSpeci %></p>
+    </div>
+
+    <div class="section">
+        <h2>Billing Details</h2>
+      <p><strong>Patient UID:</strong>  <%= patient.pid %></p>
+      <p><strong>Bill No:</strong> <%= patient.bid %></p>
+      <p><strong>Bill Date:</strong> <%= patient.bdate %></p>
+      <p><strong>Admission Date:</strong> <%= patient.adddate %></p>
+      <p><strong>Discharge Date:</strong><%= patient.disdate %></p>
+      <p><strong>Room No:</strong> <%= patient.roomNo %></p>
+    </div>
+    </div>
+    <hr>
+    <div class="section">
+      <h2>BILLING DETAILS</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Sr.No.</th>
+            <th>Particulars</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Doctor Charge</td>
+            <td><%= patient.tcharge %></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Nurse Charge</td>
+            <td><%= patient.ncharge %></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Medicine Charge</td>
+            <td><%= patient.mcharge %></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Room Charge</td>
+            <td><%= patient.rcharge %></td>
+          </tr>
+          <tr>
+            <td colspan="2" style="text-align: right;"><strong> Total Charges</strong></td>
+            <td><%= patient.totalBill %></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="right bold">Total Bill Amount: <%=  patient.totalBill %></p>
+      <p class="right bold">Amount Payable: <%=  patient.totalBill %></p>
+      <p class="right bold">Amount Paid: <%=  patient.totalBill %></p>
+    </div>
+  </body>
+</html>

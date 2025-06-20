@@ -9,6 +9,25 @@ class Patient {
             return err;
         }
     }
+
+    async getPatient(id){
+        try{
+            const result=await patiModel.getPatient(id);
+            return result;
+        }catch(err){
+            return err;
+        }
+    }
+    
+    async getPriscription(id){
+        try{
+            const result=await patiModel.getPriscription(id);
+            return result;
+        }catch(err){
+            return err;
+        }
+    }
+    
     async viewAllPatient(){
         try{
             const result=await patiModel.viewAllPatient();

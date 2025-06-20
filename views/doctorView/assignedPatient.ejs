@@ -15,6 +15,7 @@
                         <th>Issue</th>
                        
                         <th>Status</th>
+                        <th>Priscription</th>
                         <!-- <th>Update</th> -->
                         <th>Generate Bill</th>
                     </tr>
@@ -33,9 +34,9 @@
                         <td><%= p.patient_issue %></td>
                         <td><%= p.status %></td>
                         
-                        <!-- <td>
-                            <button class="update" href="/admin/getReceptionist/?i=<%= p.patient_id %>">Update</button>
-                        </td> -->
+                        <td>
+                            <a class="update" id="pri<%=p.patient_id%>" onclick="" href="/doctor/priscriptionPage/<%= p.patient_id %>"><%= p.priscription?'Update Priscription': 'Add Priscription'%></a>
+                        </td>
                         <td>
                             <a class="<%= p.check_status === 0 ? 'bill ' : 'bill disabled-link' %>" href="/doctor/setChecked/<%= p.patient_id %>" style="text-align: center;"><%= p.check_status === 0 ? 'Unchecked ' : 'Checked' %></a>
                         </td>

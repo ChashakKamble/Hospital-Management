@@ -11,14 +11,26 @@ exports.addMedicine= async(name,price)=>{
 }
 
 exports.getMedicine=async()=>{
-    return new Promise((resolve,reject)=>{
         return new Promise((resolve,reject)=>{
             db.query("select * from medicines",(err,res)=>{
-                if(err)
+                if(err){
+                    console.log("gm err result ",err);
                     reject(err)
-                else    
+                }else{    
+                    console.log("gm m result ",res);
                     resolve(res);
-            })
-        })
+                }
+            });
+        });
+}
+
+exports.getPrice=async(id)=>{
+    return new Promise((resolve,reject)=>{
+        db.query("select price from medicines where id=?",[id],(err,res)=>{
+            if(err)
+            reject(err);
+        else
+            resolve(res[0].price);
+        });   
     });
 }

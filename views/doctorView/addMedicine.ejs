@@ -1,0 +1,25 @@
+<%- include("./doctorNav.ejs") %>
+<main>
+    <%- include("./doctorSidebar.ejs") %>
+<section class="form-win">
+    <div id="addDoc" class="form-container">
+    <h2>Add Medicines </h2>
+    <form action="/doctor/medicine" method="POST">
+        <label for="name">Medicine Name:</label>
+        <input type="text" name="name" value="<%= typeof name !== 'undefined' ? name: '' %>" required>
+        <span class="error"><%= errors?.name || '' %></span>
+
+        
+        <label for="price">Price:</label>
+        <input type="text" name="price" value="<%= typeof price !== 'undefined' ? price : '' %>" required>
+        <span class="error"><%= errors?.price || '' %></span>
+
+        <br>
+        <input type="submit" value="Add Medicine">
+    </form>
+    </div>
+
+</section>
+
+</main>
+<%- include("doctorFooter") %>

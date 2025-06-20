@@ -7,6 +7,8 @@ const patient=require("../Services/patient");
 const patiSer=new patient();
 const doctorService = require("../Services/doctorService");
 const doctorSer = new doctorService();
+const bill=require("../Services/bill");
+const billSer=new bill();
 
 exports.receptionDash = (req,res)=>{
     res.render("receptionView/receptionDefaultView");
@@ -71,7 +73,6 @@ exports.getRoomDetails= async(req,res)=>{
     console.log(id);
     try{
         const result=await roomSer.roomDetails(id);
-        console.log("room details",result);
         res.status(201).render("receptionView/updateRoom",{room:result[0],errors:undefined});
 
     }catch(err){
@@ -85,7 +86,6 @@ exports.updateRoom = async(req,res)=>{
     let {roomNo,type,charge}=req.body;
     try{
         let result=await roomSer.UpdateRoom(id,roomNo,type,charge);
-        console.log("the result in update ",result);
         res.status(201).json({data:result,message:"room updated successfully"});
 
     }catch(err){
@@ -95,7 +95,6 @@ exports.updateRoom = async(req,res)=>{
 
 exports.deleteRoom= async(req,res)=>{
     let id=req.params.id;
-    console.log("id in del",id);
     try{
         let result= await roomSer.deleteRoom(id);
          res.status(201).redirect("/reception/rooms");
@@ -148,7 +147,6 @@ exports.createNurse=async (req,res)=>{
 exports.listNurse=async (req,res)=>{
     try{
         const result=await nurseSer.listNurse();
-        console.log("this is vn ",result);
         let mess=req.session.succuessMessage;
         delete req.session.succuessMessage;
         res.status(201).render("receptionView/viewNurse",{nurses:result,message:mess});
@@ -163,7 +161,6 @@ exports.nurseDetails=async (req,res)=>{
     console.log("update nurse id ",id);
     try{
         const result=await nurseSer.nurseDetails(id);
-        console.log("the result of nd ", result);
         res.status(200).render("receptionView/updateNurse",{nurse:result[0],errors:undefined});
     }catch(err){
         res.render("error",{message:err});
@@ -193,7 +190,6 @@ exports.updateNurse = async (req,res)=>{
    
     try{
         const result=await nurseSer.updateNurse(id,name,contact,shift);
-        console.log("this is result of un ",result);
         res.status(201).redirect("/reception/nurses");
     }catch(err){
         res.render("error",{message:err});
@@ -206,7 +202,7 @@ exports.deleteNurse=async (req,res)=>{
     console.log("deleting nurse "+id);
     try{
         const result=await nurseSer.deleteNurse(id);
-        console.log("this is result of dn ",result);
+
         res.status(200).json({data:result});
     }catch(err){
         res.render("error",{message:err});
@@ -215,7 +211,7 @@ exports.deleteNurse=async (req,res)=>{
 
 exports.searchNurse = async (req,res)=>{
     let val=req.query.val;
-    console.log("this val in sn ",val);
+
     try{
         const result=await nurseSer.searchNurse(val);
         console.log("this is sn result ",result);
@@ -272,7 +268,6 @@ exports.createPatient=async(req,res)=>{
     console.log("cp values "+name+age+gender+contact+issue+admitDate+roomNo+nurse+doctor);
     
         const  result=await  patiSer.addPatient(name,age,gender,contact,issue,admitDate,roomNo,nurse,doctor);
-        console.log("this is result of cp ",result);
         if(typeof result ==="object")
             res.status(201).render("receptionView/addPatient",{errors:undefined,gender:undefined,rooms:rooms,roomNo:undefined,nurse:undefined,doctor:undefined,status:undefined,nurses:nurses,doctors:doctors,message:"Patient added Successfully"});
         else    
@@ -285,7 +280,6 @@ exports.createPatient=async(req,res)=>{
 exports.listPatient=async(req,res)=>{
     try{
         const result=await patiSer.viewAllPatient();
-        console.log("this is result of lp ",result);
         if(typeof result==="object"){
             res.status(201).render("receptionView/viewPatient",{patients:result});
         }else{
@@ -296,4 +290,27 @@ exports.listPatient=async(req,res)=>{
     }
 }
 
+/// constroller for creating the bill 
 
+exports.generateBill=async(req,res)=>{
+    let id=req.params.id;
+    try{
+        const setDischared=await patiSer.setDischared(id);
+        console.log("result of set dicharge ",setDischared);
+        const addbill= await billSer.addBill(id);
+        console.log("setDischared returned:", setDischared);
+console.log("addbill returned:", addbill);
+
+        if(setDischared && addbill){
+            const result=await billSer.getBill(id);
+          
+            res.render("receptionView/generateBill",{patient:result[0],message:undefined});
+        }else{
+            
+            res.render("error",{message:"problem in try result "});
+        }
+        
+    }catch(err){
+        res.render("error",{message:"problme in catch "+err});
+    }
+}
