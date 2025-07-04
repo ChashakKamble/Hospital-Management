@@ -46,6 +46,25 @@ class Patient {
         }   
     }
 
+    async updatePatient(id ,name,age,gender,contact,issue,admitionDate,roomNo,nurse,doctor){
+        try{
+            const result=await patiModel.updatePatient(id ,name,age,gender,contact,issue,admitionDate,roomNo,nurse,doctor);
+            return result;
+        }catch(err){
+            return err;
+        }
+    }
+    
+    async deletePatient(id){
+        try{
+            const result=await patiModel.deletePatient(id);
+            return result;
+        }catch(err){
+            return err;
+        }
+    }
+
+
     async setChecked(id){
         try{
             const result=await patiModel.setChecked(id);

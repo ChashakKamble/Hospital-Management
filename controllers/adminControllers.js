@@ -4,6 +4,9 @@ let doctorService = require("../Services/doctorService");
 let doctorSer = new doctorService();
 let ReceptionService = require("../Services/reception");
 let receptionSer = new ReceptionService();
+let admin=require("../Services/admin");
+let adminSer=new admin();
+
 
 let jwt=require("jsonwebtoken");
 const secretKey = "this_is_a_secret_key"; // Use a secure key in production
@@ -11,16 +14,16 @@ const con = require("../config/db");
 
 
 exports.adminDefault=async(req,res)=>{
-     let allDocs=await doctorSer.getDoctors();
-          
-    res.render("adminView/adminDefaultView",{message:"",doctors:allDocs});
+     let result=await adminSer.dashBoard();
+    
+    res.render("adminView/adminDefaultView",{message:"",data:result});
 }
 
 exports.docRegPage = (req, res) => {
     
     let mess=req.session.successMessage; 
     delete req.session.successMessage; // Clear the message after rendering  
-    res.render("adminView/registerDoctor",{message:mess,errors:undefined});
+    res.render("adminView/registerDoctor",{message:mess,errors:undefined,doctor:{}});
 }
 
 exports.viewDoctor=async(req,res)=>{
@@ -68,7 +71,7 @@ exports.searchDoc = async (req,res)=>{
 exports.receptionistPage = (req, res) => {
     let mess = req.session.successMessage;
     delete req.session.successMessage; // Clear the message after rendering
-    res.render("adminView/registerReceptionist", {errors:undefined, message: mess });
+    res.render("adminView/registerReceptionist", {errors:undefined, message: mess,doctor:{} });
 }
 exports.createReceptionist = async (req, res) => {
   const { name, email, contact, role, status } = req.body;
@@ -94,7 +97,7 @@ exports.createReceptionist = async (req, res) => {
     }
 
     if (!status || status.trim() === '') {
-        errors.status = 'Status is required';
+        errors.status = "Status Must Be 'Available' or 'Unavailable' ";
     }
 
     if (Object.keys(errors).length > 0) {
@@ -161,8 +164,42 @@ exports.getReceptionist=async(req,res)=>{
 }
 
 exports.updateReceptionist= async(req,res)=>{
-    let {id,name,email,contact,status,userId }=req.body;
+    let {id,name,email,role,contact,status,userId }=req.body;
     console.log("updating reception for id ",id);
+     const errors = [];
+
+    // Name validation
+    if (!name || !/^[A-Za-z\s]+$/.test(name)) {
+        errors.push({ msg: "Name is required and should contain only letters." });
+    }
+
+    // Email validation
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errors.push({ msg: "Invalid email address." });
+    }
+
+    // Contact validation
+    if (!contact || !/^[6-9]\d{9}$/.test(contact)) {
+        errors.push({ msg: "Contact must be a valid 10-digit Indian number." });
+    }
+
+    // Role validation
+    if (role !== 'Receptionist') {
+        errors.push({ msg: "Role must be 'Receptionist'." });
+    }
+
+    // Status validation
+    if (!['Active', 'Inactive', 'Available'].includes(status)) {
+        errors.push({ msg: "Status must be either 'Active', 'Inactive', or 'Available'." });
+    }
+    status=status.trim();
+    // If any validation fails
+    if (errors.length > 0) {
+        return res.render("updateReceptionist", {
+            errors,
+            receptionist: { id, name, email, contact, role, status, user_id: uid }
+        });
+    }
 
     try{
         let result=await receptionSer.updateReceptionist(id,name,email,contact,status,userId);

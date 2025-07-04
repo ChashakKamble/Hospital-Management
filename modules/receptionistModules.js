@@ -46,4 +46,17 @@ exports.updateReceptionist=async(id,name,email,contact,status)=>{
                 resolve(res)
         });
     });
+
+   
 }
+exports.activeRecCount=async()=>{    
+        return new Promise((resolve,reject)=>{
+            db.query("select count(*) as receptions from reception where status='Available'",(err,res)=>{
+            if(err)
+                reject(err);
+            else
+                resolve(res)  
+            })
+        })
+
+} 

@@ -27,8 +27,12 @@ receptionistRouter.get("/searchNurse",receptionistController.searchNurse);
 receptionistRouter.get("/patient",receptionistController.addPatientPage);
 receptionistRouter.post("/patient",receptionistController.createPatient);
 receptionistRouter.get("/patients",receptionistController.listPatient);
+receptionistRouter.get("/getUpdatePage/:id",receptionistController.getPatient);
+receptionistRouter.post("/updatePatient",receptionistController.updatePatient);
+receptionistRouter.get("/deletePatient/:id",receptionistController.deletePatient);
 
 
 //bill generation
 receptionistRouter.get("/generateBill/:id",receptionistController.generateBill);
+receptionistRouter.get("/printBill/:id",receptionistController.printBill);
 module.exports=receptionistRouter;

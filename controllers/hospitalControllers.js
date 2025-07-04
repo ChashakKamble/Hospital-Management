@@ -1,10 +1,12 @@
 let userService = require("../Services/userService");
 let userSer =new userService();
 let doctorService = require("../Services/doctorService");
+let doctorSer = new doctorService();
+
 let jwt=require("jsonwebtoken");
 const secretKey = "this_is_a_secret_key"; // Use a secure key in production
 const con = require("../config/db");
-let doctorSer = new doctorService();
+
 exports.homePage = (req, res) => {
     res.render("home");
 }
@@ -107,7 +109,7 @@ exports.registerDoctor = async (req, res) => {
     if (!contact || !/^\d{10}$/.test(contact)) errors.contact = 'Valid 10-digit contact number is required';
     if (!speci || speci.trim() === '') errors.speci = 'Specialization is required';
     if (!exp || exp.trim() === '') errors.exp = 'Experience is required';
-    if (!status || status.trim() === '') errors.status = 'Status is required';
+    if (!status || status.trim() === '') errors.status = "Status must be either 'Available' or 'Unavailable'.";
 
     if (Object.keys(errors).length > 0) {
         // Send back old data and error messages
@@ -131,7 +133,49 @@ exports.registerDoctor = async (req, res) => {
 
 exports.updateDoctor = async (req, res) => {
     let { id, name, email, contact, speci, exp, status,uid } = req.body;
-   // uid is doctors user id 
+      const errors = [];
+
+    // Name validation
+    if (!name || !/^[A-Za-z\s]+$/.test(name)) {
+        errors.push({ msg: "Name is required and should contain only letters." });
+    }
+
+    // Email validation
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errors.push({ msg: "Invalid email address." });
+    }
+
+    // Contact validation
+    if (!contact || !/^[6-9]\d{9}$/.test(contact)) {
+        errors.push({ msg: "Contact must be a valid 10-digit Indian number." });
+    }
+
+    // Specialization validation
+    if (!speci || !/^[A-Za-z\s]+$/.test(speci)) {
+        errors.push({ msg: "Specialization must contain only letters." });
+    }
+
+    // Experience validation
+    exp = parseInt(exp);
+    if (isNaN(exp) || exp < 0 || exp > 60) {
+        errors.push({ msg: "Experience must be a number between 0 and 60." });
+    }
+
+    // Status validation
+    if (!['Available', 'Unavailable'].includes(status)) {
+        errors.push({ msg: "Status must be either 'Available' or 'Unavailable'." });
+    }
+
+    // If validation errors exist, re-render form with values and errors
+    if (errors.length > 0) {
+        return res.render("updateDoctor", {
+            errors,
+            doctor: { id, name, email, contact, speci, exp, status, user_id: uid }
+        });
+    }
+
+
+
     console.log("Updating doctor with ID:", id);
     let result = await doctorSer.updateDoctor(id, name, email, contact, speci, exp, status,uid);
     console.log("Update result in cont: ", result);

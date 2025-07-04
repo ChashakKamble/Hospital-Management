@@ -11,6 +11,9 @@ exports.isUsernameTaken=async(username)=>{
     });
 }
 
+// get all active doctors
+
+
 // to get the admin by user id
 exports.getAdmin=async(userId)=>{
     return new Promise((responce,reject)=>{

@@ -6,21 +6,32 @@
             <form action="/updateDoctor" method="POST">
                 <input type="hidden" name="id" value="<%= doctor.doctor_id %>">
                 <label for="name">Name:</label>
-                <input type="text"  name="name" value="<%= doctor.doctor_name%>"  required>
+                <input type="text" name="name" value="<%= doctor.doctor_name %>" required pattern="[A-Za-z\s]+" title="Name should contain only letters">
+
                 <label for="email">Email:</label>
-                <input type="text"  name="email" value="<%=doctor.doctor_email %>" required>
+                <input type="email" name="email" value="<%= doctor.doctor_email %>" required>
+
                 <label for="contact">Contact:</label>
-                <input type="text"  name="contact" value="<%=doctor.doctor_contact %>" required>
+                <input type="text" name="contact" value="<%= doctor.doctor_contact %>" required pattern="[6-9]\d{9}" title="Enter a valid 10-digit Indian phone number">
+
                 <label for="role">Role:</label>
-                <input type="text"  name="role" value="Doctor" required>
+                <input type="text" name="role" value="Doctor" readonly>
+
                 <label for="speci">Specialization:</label>
-                <input type="text"  name="speci" value="<%=doctor.doctor_specialization %>" required>
+                <input type="text" name="speci" value="<%= doctor.doctor_specialization %>" required pattern="[A-Za-z\s]+" title="Specialization should contain only letters">
+
                 <label for="exp">Experience:</label>
-                <input type="text"  name="exp" value="<%= doctor.doctor_experience %>"   required>
-                <label for="status">Status:</label>
-                <input type="text"  name="status" value="<%= doctor.status %>" required>
+                <input type="number" name="exp" value="<%= doctor.doctor_experience %>" min="0" max="60" required title="Experience must be between 0 and 60 years">
+
+                 <label for="status">Status:</label>
+                 <select name="status" required>
+                 <option value="">Select status</option>
+                <option value="Available" <%= doctor.status === 'Available' ? 'selected' : '' %>>Available</option>
+                <option value="Unavailable" <%= doctor.status === 'Unavailable' ? 'selected' : '' %>>Unavailable</option>
+                </select>
+
                 <input type="hidden" name="uid" value="<%= doctor.user_id %>">
-                <input type="submit" value="Update Doctor" >
+                <input type="submit" value="Update Doctor">
             </form>
         </div>
     </section>

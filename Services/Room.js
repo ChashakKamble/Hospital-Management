@@ -1,4 +1,5 @@
  const roomModel=require("../modules/roomsModules");
+ const patientModel=require("../modules/patientModules")
  class Room {
 
     async createRoom (roomNo,type,charge){
@@ -10,6 +11,26 @@
         }
     }
 
+    async setUnavailable(id){
+        try{
+            const result=await roomModel.setUnavailable(id);
+            return result;
+        }catch(err){
+            return err;
+        }
+    }
+
+      async setAvailable(id){
+        try{
+            const patient=await patientModel.getPatient(id);
+            let roomId=patient[0].room_id;
+            const result=await roomModel.setAvailable(roomId);
+            return result;
+        }catch(err){
+            return err;
+        }
+    }
+
     async viewAllRooms(){
         try{
             const result=await roomModel.viewAllRooms();
@@ -18,6 +39,17 @@
             return "Error While Getting all rooms "+err;
         }
     }
+
+
+    async availableRooms(){
+        try{
+            const result=await roomModel.availableRooms()
+            return result;
+        }catch(err){
+            return err;
+        }
+    }
+    
     async roomDetails(id){
         try{
             const result=await roomModel.roomDetails(id);

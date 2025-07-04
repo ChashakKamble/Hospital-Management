@@ -11,8 +11,8 @@
 <body>
 
     <nav>
-        <h1>CK Hospital</h1>
-        <h2>welcome :<%= cur_user ? cur_user.username : "Guest" %></h2>
+        <div class="logo"></div>
+        <p> <i> <em> Welcome <%= cur_user ? cur_user.username : "Guest" %></em></i></p>
         <a class="logout" href="/logout" >Log Out</a>
     </nav>
 </body>

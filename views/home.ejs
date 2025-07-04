@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CK Hospital</title>
-    <!-- Bootstrap 5 CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<!-- Bootstrap 5 JS Bundle -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-
-    <style>
-        body {
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CK Hospital - Excellence in Healthcare</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="homeStyle.css">
+  
+  <style>
+	  body {
             background-color: #f4f4f4;
             font-family: 'Roboto', sans-serif;
             margin: 0;
@@ -46,332 +45,349 @@
             font-size: 16px;
             font-weight: 500;
             margin-right: 20px;
+			margin-top:5px;
             transition: 0.3s;
             cursor: pointer;
-            
+            position: relative;
             padding: 5px 0;
         }
-
-       
-        
-
-		/* Fix carousel height and make it responsive */
-.carousel {
-    height: 90vh; /* Full screen height */
-    overflow: hidden;
-}
-
-.carousel-inner,
-.carousel-item {
-    height: 100%;
-}
-
-.carousel-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures image scales without distortion */
-}
-
-      
-
-        /* About Us Section */
-        .about-section {
-            padding: 80px 20px;
-            background: #ffffff;
-            text-align: center;
-            opacity: 0;
-            transform: translateX(-100%);
-            animation: slideInFromLeft 1s forwards;
-        }
-
-        .about-section h2 {
-            font-size: 36px;
-            color: #004080;
-            margin-bottom: 20px;
-        }
-
-        .about-section p {
-            font-size: 18px;
-            color: #555;
-            max-width: 900px;
-            margin: 0 auto;
-            line-height: 1.8;
-        }
-
-        .about-section p span {
-            font-weight: 700;
-            color: #004080;
-        }
-
-        /* Footer Styling */
-        .footer {
-            background-color: black;
-            color: #fff;
-            text-align: center;
-            padding: 20px 0;
-        }
-
-        .footer a {
-            color: #ffcc00;
-            text-decoration: none;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
-            transform: scale(1.1);
-        }
 		
-		.department-card {
-		    border: none;
-		    transition: transform 0.3s ease, box-shadow 0.3s ease;
-		    border-radius: 15px;
-		    background-color: #f9f9f9;
-		}
+		 .btn-login {
+      background-color: #28a745;
+      color: white;
+      border-radius: 20px;
+      padding: 8px 16px;
+    }
+    .btn-login:hover {
+      background-color: #218838;
+    }
 
-		.department-card:hover {
-		    transform: translateY(-10px);
-		    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-		    background-color: #e6f2ff;
-		}
+     .hero-section {
+     
+	  background: linear-gradient(to right, #6dd5fa, #ffffff);
+      background-position: center;
+      color: black;
+      padding: 100px 0;
+      text-align: center;
+    }
+    .hero-section h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+    }
+    .section-title {
+      text-align: center;
+      margin: 40px 0 20px;
+      font-weight: bold;
+    }
+    .card img {
+      height: 200px;
+      object-fit: cover;
+    }
+    footer {
+      background-color: black;
+      color: white;
+      padding: 20px 0;
+    }
+	
+	.shadow-box {
+  background-color: white;
+  padding: 40px;
+  border-radius: 12px;
+  margin: 50px auto;
+  max-width: 900px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* OUTER shadow */
+}
 
-		.department-card img {
-		    height: 64px;
-		}
+//media Query
+
+@media (max-width: 991.98px) {
+  .navbar .navbar-nav {
+    text-align: center;
+  }
+  .navbar .nav-link {
+    margin-right: 0;
+    padding: 10px;
+    display: block;
+  }
+  .btn-login {
+    margin-top: 10px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section h1 {
+    font-size: 2rem;
+  }
+
+  .hero-section p.lead {
+    font-size: 1rem;
+  }
+
+  .shadow-box {
+    padding: 20px;
+    margin: 20px auto;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .card img {
+    height: 180px;
+  }
+}
+
+.footer-link {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  display: block;
+  margin-bottom: 8px;
+  transition: color 0.3s;
+}
+.footer-link:hover {
+  color: #00c9a7;
+  text-decoration: underline;
+}
 
 
-        @keyframes fadeInUp {
-            0% { opacity: 0; transform: translateY(30px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
+@media (max-width: 576px) {
+  .navbar-brand {
+    font-size: 20px;
+  }
 
-        /* Slide-in Animation */
-        @keyframes slideInFromLeft {
-            0% {
-                opacity: 0;
-                transform: translateX(-100%);
-            }
-            100% {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-    </style>
+  .card-body h5 {
+    font-size: 1.1rem;
+  }
+
+  .card-body p {
+    font-size: 0.95rem;
+  }
+
+  footer h5 {
+    font-size: 1rem;
+  }
+
+  footer p, footer a {
+    font-size: 0.9rem;
+  }
+}
+
+  </style>
 </head>
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">CK Hospital</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/login">Login</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-	<!--Carosel section-->
-
-	<div id="hospitalCarousel" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#hospitalCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#hospitalCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#hospitalCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="./doc_patient.png" class="d-block w-100" alt="Hospital Front">
-      <div class="carousel-caption d-none d-md-block ">
-        <h5>Modern Infrastructure</h5>
-        <p>State-of-the-art equipment and clean environment.</p>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img src="./staff.png" class="d-block w-100" alt="Doctors">
-      <div class="carousel-caption d-none d-md-block text-black">
-        <h5>Professional Doctors</h5>
-        <p>Qualified staff with experience in every department.</p>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img src="pic_3.jpg" class="d-block w-100" alt="Emergency Care">
-      <div class="carousel-caption d-none d-md-block text-black">
-        <h5>24/7 Emergency</h5>
-        <p>Immediate care available anytime, day or night.</p>
-      </div>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container">
+    <a class="navbar-brand" href="#">CK Hospital</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#service">Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-login" href="/login">Login</a>
+        </li>
+      </ul>
     </div>
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#hospitalCarousel" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#hospitalCarousel" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
+</nav>
 
-
-    <!-- Hero Section 
-    <div class="hero-section">
-		
-		
-        <div class="hero-content">
-            <h1>Welcome to CK Hospital</h1>
-            <p>Your Health, Our Priority. Providing Quality Care for Everyone.</p>
-            <a href="#about">Learn More</a>
-        </div>
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <h1>Welcome to CK Hospital</h1>
+      <p class="lead">Delivering Excellence in Healthcare</p>
     </div>
-	-->
-    <!-- About Us Section -->
-    <section id="about" class="about-section">
-        <div class="container">
-            <h2>About Us</h2>
-            <p><span>Hospital</span> is dedicated to providing high-quality healthcare services. Our expert team of medical professionals ensures compassionate care with advanced technology and state-of-the-art facilities. We specialize in emergency care, surgery, maternity, and pediatric services. <br> With a commitment to innovation, we continuously evolve to meet the needs of our patients, offering the latest medical treatments and personalized care.</p>
+  </section>
+
+  <!-- Services Section -->
+  <section id="service" class="container mt-5">
+    <h2 class="section-title">Our Services</h2>
+    <div class="row text-center">
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+          <img src="generalCheck.jpg" class="card-img-top" alt="General Checkup">
+          <div class="card-body">
+            <h5 class="card-title">General Checkup</h5>
+            <p class="card-text">Routine health examinations for early detection and peace of mind.</p>
+          </div>
         </div>
-    </section>
-	
-	
-	<!-- Mission and Vision Section -->
-	<section class="about-section" style="background-color: #e6f2ff; animation-delay: 0.8s;">
-	    <div class="container">
-	        <h2>Our Mission & Vision</h2>
-	        <p><span>Mission:</span> To deliver compassionate, accessible, high-quality, cost-effective healthcare to the community.</p>
-	        <p><span>Vision:</span> To be the preferred choice in healthcare services for individuals, families, and businesses in our community.</p>
-	    </div>
-	</section>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+          <img src="surgicalServices.png" class="card-img-top" alt="Surgery Services">
+          <div class="card-body">
+            <h5 class="card-title">Surgical Services</h5>
+            <p class="card-text">Modern operation theatres and highly experienced surgical team.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+          <img src="Emer.png" class="card-img-top" alt="Emergency Care">
+          <div class="card-body">
+            <h5 class="card-title">24/7 Emergency</h5>
+            <p class="card-text">Rapid response emergency team ready day and night for critical care.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-	<!-- Our Departments Section -->
-	<section class="about-section" style="animation-delay: 0.4s;">
-	    <div class="container">
-	        <h2>Our Departments</h2>
-	        <div class="row mt-4">
-	            <!-- Emergency -->
-	            <div class="col-md-4 mb-4">
-	                <div class="card department-card h-100 shadow-sm">
-	                    <div class="card-body text-center">
-	                        
-	                        <h5 class="card-title mt-3">Emergency Medicine</h5>
-	                        <p class="card-text">24/7 emergency care with a state-of-the-art trauma unit and rapid response teams.</p>
-	                    </div>
-	                </div>
-	            </div>
-	            <!-- Cardiology -->
-	            <div class="col-md-4 mb-4">
-	                <div class="card department-card h-100 shadow-sm">
-	                    <div class="card-body text-center">
-	                        
-	                        <h5 class="card-title mt-3">Cardiology</h5>
-	                        <p class="card-text">Advanced heart care with diagnostic, surgical, and recovery services led by specialists.</p>
-	                    </div>
-	                </div>
-	            </div>
-	            <!-- Neurology -->
-	            <div class="col-md-4 mb-4">
-	                <div class="card department-card h-100 shadow-sm">
-	                    <div class="card-body text-center">
-	                        
-	                        <h5 class="card-title mt-3">Neurology</h5>
-	                        <p class="card-text">Comprehensive care for brain, spinal, and nerve disorders using the latest in medical tech.</p>
-	                    </div>
-	                </div>
-	            </div>
-	            <!-- Maternity & Pediatrics -->
-	            <div class="col-md-6 mb-4">
-	                <div class="card department-card h-100 shadow-sm">
-	                    <div class="card-body text-center">
-	                        
-	                        <h5 class="card-title mt-3">Gynecology</h5>
-	                        <p class="card-text">focuses on the health of the female reproductive system, including diagnosis, 
-							prevention, and treatment of related disorders and diseases</p>
-	                    </div>
-	                </div>
-	            </div>
-	            <!-- Orthopedics -->
-	            <div class="col-md-6 mb-4">
-	                <div class="card department-card h-100 shadow-sm">
-	                    <div class="card-body text-center">
-	                        
-	                        <h5 class="card-title mt-3">Orthopedics</h5>
-	                        <p class="card-text">Joint care, fracture treatment, and complex orthopedic surgeries done by experts.</p>
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-	</section>
+  <!-- About Section -->
+  <section id="about" class="container mt-5 about-section shadow-box">
+    <h2 class="section-title">About CK Hospital</h2>
+    <p class="text-center px-4">
+      CK Hospital is a multi-specialty healthcare institution dedicated to delivering high-quality medical services with a compassionate touch. Our team of skilled professionals uses advanced technology to ensure comprehensive care and patient satisfaction.
+    </p>
+  </section>
 
+  <!-- Departments Section -->
+  <section class="container mt-5">
+    <h2 class="section-title">Our Departments</h2>
+    <div class="row mt-4">
+      <div class="col-md-4 mb-4">
+        <div class="card department-card h-100 shadow-sm">
+          <img src="Emergency.jpg" alt="Emergency">
+          <div class="card-body text-center">
+            <h5 class="card-title mt-3">Emergency Medicine</h5>
+            <p class="card-text">24/7 emergency care with trauma unit and rapid response teams.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card department-card h-100 shadow-sm">
+          <img src="cardiology.png" alt="Cardiology">
+          <div class="card-body text-center">
+            <h5 class="card-title mt-3">Cardiology</h5>
+            <p class="card-text">Advanced heart care with diagnostics, surgery, and recovery services.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card department-card h-100 shadow-sm">
+          <img src="neurology.jpeg" alt="Neurology">
+          <div class="card-body text-center">
+            <h5 class="card-title mt-3">Neurology</h5>
+            <p class="card-text">Care for brain, spine, and nerve conditions using latest tech.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card department-card h-100 shadow-sm">
+          <img src="Gyno.png" alt="Gynecology">
+          <div class="card-body text-center">
+            <h5 class="card-title mt-3">Gynecology</h5>
+            <p class="card-text">Women's reproductive health, maternity, and preventive care services.</p>
+          </div>
+        </div>
+      </div>
+	  
+	  <div class="col-md-4 mb-4">
+        <div class="card department-card h-100 shadow-sm">
+          <img src="surgery.jpg" alt="surgery">
+          <div class="card-body text-center">
+            <h5 class="card-title mt-3">Surgery</h5>
+            <p class="card-text">It can range from minor to complex, the surgical procedure itself, and post-operative care.</p>
+          </div>
+        </div>
+      </div>
+	  
+      <div class="col-md-4 mb-4">
+        <div class="card department-card h-100 shadow-sm">
+          <img src="Ortho.png" alt="Orthopedics">
+          <div class="card-body text-center">
+            <h5 class="card-title mt-3">Orthopedics</h5>
+            <p class="card-text">Joint care, fracture treatment, and advanced orthopedic surgeries.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-	<!-- Why Choose Us Section -->
-	<section class="about-section" style="background-color: #e6f2ff; animation-delay: 0.8s;">
-	    <div class="container">
-	        <h2>Why Choose CK Hospital?</h2>
-	        <p>We believe in excellence. Here’s why our patients trust us:</p>
-	        <div class="row mt-4">
-	            <div class="col-md-4">
-	                <h5>✔ Experienced Doctors</h5>
-	                <p>Our board-certified specialists are leaders in their fields.</p>
-	            </div>
-	            <div class="col-md-4">
-	                <h5>✔ Advanced Equipment</h5>
-	                <p>State-of-the-art medical technology for accurate diagnosis and treatment.</p>
-	            </div>
-	            <div class="col-md-4">
-	                <h5>✔ Patient-Centered Care</h5>
-	                <p>We treat patients with compassion, dignity, and respect.</p>
-	            </div>
-	        </div>
-	    </div>
-	</section>
+ 
+  <!-- Footer -->
+  <footer class="footer-section text-white pt-5" style="background-color: #000;">
+  <div class="container">
+    <div class="row">
 
-	<!-- Contact Information -->
-	<section class="about-section" style="animation-delay: 0.8s;" >
-	    <div class="container">
-	        <h2>Contact Information</h2>
-	        <p><strong>Address:</strong> CK Hospital,  Karve Nagar, Pune, India</p>
-	        <p><strong>Phone:</strong> +91 8956237423 | <strong>Email:</strong> contact@ckhospital.com</p>
-	        <p><strong>Working Hours:</strong> Mon - Sat: 10 AM - 7 PM</p>
-	    </div>
-	</section>
+      <!-- Hospital Info -->
+      <div class="col-md-4 mb-4">
+        <h5 class="text-uppercase fw-bold mb-3">CK Hospital</h5>
+        <p>
+          Excellence in healthcare, compassion in service.<br>
+          123 Health Street, Pune - 411001<br>
+          Phone: +91 9876543210<br>
+          Email: <a href="mailto:info@ckhospital.com" class="text-white text-decoration-underline">info@ckhospital.com</a>
+        </p>
+      </div>
 
+      <!-- Quick Links -->
+      <div class="col-md-2 mb-4">
+        <h5 class="text-uppercase fw-bold mb-3">Quick Links</h5>
+        <ul class="list-unstyled">
+          <li><a href="#" class="footer-link">Home</a></li>
+          <li><a href="#about" class="footer-link">About</a></li>
+          <li><a href="#service" class="footer-link">Services</a></li>
+          <li><a href="#" class="footer-link">Contact</a></li>
+          <li><a href="#" class="footer-link">Feedback</a></li>
+        </ul>
+      </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <p>&copy; 2025 CK Hospital. All Rights Reserved. <a href="#">Contact Us</a></p>
-    </footer>
+      <!-- Specialities -->
+      <div class="col-md-3 mb-4">
+        <h5 class="text-uppercase fw-bold mb-3">Specialities</h5>
+        <ul class="list-unstyled">
+          <li><a href="#" class="footer-link">Cancer Surgeries</a></li>
+          <li><a href="#" class="footer-link">ENT</a></li>
+          <li><a href="#" class="footer-link">Orthopedics</a></li>
+          <li><a href="#" class="footer-link">Cardiology</a></li>
+          <li><a href="#" class="footer-link">Maternity Care</a></li>
+        </ul>
+      </div>
 
-    <!-- Add jQuery and Bootstrap JS for smooth scrolling -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <!-- Newsletter + Social -->
+      <div class="col-md-3 mb-4">
+        <h5 class="text-uppercase fw-bold mb-3">Stay Connected</h5>
+        <form class="mb-3">
+          <div class="input-group">
+            <input type="email" class="form-control" placeholder="Subscribe via email" />
+            <button class="btn btn-success" type="submit">Go</button>
+          </div>
+        </form>
+        <div>
+          <a href="#" class="text-white fs-5 me-3"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="text-white fs-5 me-3"><i class="bi bi-twitter"></i></a>
+          <a href="#" class="text-white fs-5 me-3"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="text-white fs-5"><i class="bi bi-linkedin"></i></a>
+        </div>
+      </div>
 
-    <script>
-        // Smooth scrolling when clicking on About Us link
-        $(document).ready(function(){
-            $("a[href^='#']").on('click', function(e) {
-                e.preventDefault();
-                var target = this.hash;
-                $('html, body').animate({
-                    scrollTop: $(target).offset().top
-                }, 800, function(){
-                    window.location.hash = target;
-                });
-            });
-        });
-    </script>
+    </div>
 
+    <hr class="border-light" />
+    <div class="text-center pb-3">
+      <p class="mb-0">&copy; 2025 <strong>CK Hospital</strong>. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+
+

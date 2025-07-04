@@ -23,7 +23,7 @@ app.use(session({
     saveUninitialized: true, // Save uninitialized sessions 
 }));
 app.use(middeware.cur_user); // Middleware to set current user in res.locals
-//app.use(authenticateMiddelware.authenticateToken);
+app.use(authenticateMiddelware.authenticateToken);
 app.use((req, res, next) => {
     res.set('Cache-Control', 'no-store');
     next();

@@ -30,7 +30,11 @@
         <span class="error"><%= errors?.exp || '' %></span>
 
         <label for="status">Status:</label>
-        <input type="text" name="status" value="<%= typeof status !== 'undefined' ? status : '' %>" required>
+                 <select name="status" required>
+                 <option value="">Select status</option>
+                <option value="Available" <%= doctor.status === 'Available' ? 'selected' : '' %>>Available</option>
+                <option value="Unavailable" <%= doctor.status === 'Unavailable' ? 'selected' : '' %>>Unavailable</option>
+                </select>
         <span class="error"><%= errors?.status || '' %></span>
 
         <input type="submit" value="Add Doctor">

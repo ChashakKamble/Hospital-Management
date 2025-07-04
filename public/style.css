@@ -21,7 +21,7 @@ nav{
 section{
     padding: 20px;
     height:90vh;
-    border-left: 5px solid #6dd5fa;
+    /* border-left: 5px solid #6dd5fa; */
 }
 main{
     display: flex;
@@ -61,7 +61,7 @@ main{
     transition: background-color 0.3s ease;
 }
 .admin-menu a:hover{
-     background-image:linear-gradient(to right,#4b95af,#6dd5fa);
+     background-image:linear-gradient(to right,#6dd4fa,#18a7dc);
      color:azure;
 }
 .form-win{
@@ -94,8 +94,9 @@ main{
 .card{
     width:20%;
     height:30%;
-   background-color: rgba(255, 255, 255, 0.263);
-    padding: 25px;
+   background-color: rgba(255, 255, 255, 0.553);
+    box-shadow: -4px 4px 10px gray;
+    padding: 20px;
     text-align: center ;
 }
 .card strong{
@@ -103,7 +104,7 @@ main{
     color: black;
 }
 strong.number{
-    font-size: 65px;
+    font-size: 50px;
     color: rgba(68, 66, 66, 0.352);
 }
 #addDoc,#updateDoc{
@@ -241,12 +242,12 @@ strong.number{
 }
 
 
-a.logout , nav a.logout {
+.admin-menu a.logout , nav a.logout {
   padding: 5px 10px;
   border-radius: 5px;
-  border:3px solid #f92237;
+  background-color: #f92237;
   text-align: center;
-  color: #f92237;
+  color: #f8f6f6;
 }
 #viewDoc .delete:hover , .admin-menu a.logout:hover , nav a.logout:hover, .btn-container .delete  {
   background-color: #fe011a;
@@ -352,6 +353,11 @@ a.logout , nav a.logout {
   display: flex;
   flex-direction: column;
   height: 100%;
+}
+
+#viewDoc .delete:hover , .admin-menu a.logout:hover , nav a.logout:hover, .btn-container .delete  {
+  background-color: #fe011a;
+  color:azure;
 }
 
 /* for patient */
@@ -526,4 +532,26 @@ input[type="submit"]:hover {
   padding:10px;
   display: flex;
   justify-content: center;
+}
+.logo{
+  height: inherit;
+  width: 130px;
+ background-image: url("logo.png");
+  background-position:center ;
+  background-size:130% ;
+}
+.docPanal{
+  background-image: linear-gradient(to right, #6dd4fa86, #3c3b3b84), url('doc.png');
+  background-size: cover;
+  background-position: center;
+}
+.recePanal{
+  background-image: linear-gradient(to right, #6dd4fa86, #3c3b3b84), url('receptionist.png');
+  background-size: cover;
+  background-position: center;
+}
+.adminPanal{
+  background-image: linear-gradient(to right, #6dd4fa86, #3c3b3b84), url('admin.png');
+  background-size: cover;
+  background-position: center;
 }

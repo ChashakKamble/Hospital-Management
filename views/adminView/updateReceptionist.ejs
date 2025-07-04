@@ -4,19 +4,28 @@
 <section class="form-win">
       <div id="addDoc">
             <form action="/admin/updateReceptionist" method="POST">
-                <input type="hidden" name="id" value="<%= receptionist.reception_id %>">
                 <label for="name">Name:</label>
-                <input type="text"  name="name" value="<%= receptionist.reception_name%>"  required>
-                <label for="email">Email:</label>
-                <input type="text"  name="email" value="<%=receptionist.Reception_email %>" required>
-                <label for="contact">Contact:</label>
-                <input type="text"  name="contact" value="<%=receptionist.reception_contact %>" required>
-                <label for="role">Role:</label>
-                <input type="text"  name="role" value="Receptionist" required>
-                <label for="status">Status:</label>
-                <input type="text"  name="status" value="<%= receptionist.status %>" required>
-                <input type="hidden" name="uid" value="<%= receptionist.user_id %>">
-                <input type="submit" value="Update receptionist" >
+    <input type="text" name="name" value="<%= receptionist.reception_name %>" required pattern="[A-Za-z\s]+" title="Name should contain only letters">
+
+    <label for="email">Email:</label>
+    <input type="email" name="email" value="<%= receptionist.Reception_email %>" required>
+
+    <label for="contact">Contact:</label>
+    <input type="text" name="contact" value="<%= receptionist.reception_contact %>" required pattern="[6-9]\d{9}" title="Enter a valid 10-digit Indian number">
+
+    <label for="role">Role:</label>
+    <input type="text" name="role" value="Receptionist" >
+
+    <label for="status">Status:</label>
+    <select name="status" required>
+        <option value="">-- Select Status --</option>
+        <option value="Available" <%= receptionist.status === 'Available' ? 'selected' : '' %>>Available</option>
+        <option value="Unavailable" <%= receptionist.status === 'Unavailable' ? 'selected' : '' %>>Unavailable</option>
+    </select>
+
+    <input type="hidden" name="uid" value="<%= receptionist.user_id %>">
+
+    <input type="submit" value="Update Receptionist">
             </form>
         </div>
     </section>

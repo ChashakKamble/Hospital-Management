@@ -14,6 +14,17 @@ exports.registerDoctor = async (name,email,contact, speci, exp , status,userid,a
     });
 }
 
+exports.activeDocCout=async()=>{
+    return new Promise((resolve,reject)=>{
+        db.query("select count(*) as doctors from doctors where status='Available'",(err,res)=>{
+            if(err)
+                reject(err);
+            else
+                resolve(res);
+        })
+    })
+}
+
 exports.searchDoc=async(val)=>{
     
     return new Promise((resolve,reject)=>{
@@ -81,3 +92,4 @@ exports.updateDoctor = async ( id,name, email, contact, speci, exp, status) => {
             );
         });
 }
+

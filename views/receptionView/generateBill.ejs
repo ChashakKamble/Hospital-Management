@@ -77,7 +77,7 @@
       <p class="right bold">Amount Payable: <%=  patient.totalBill %></p>
       <p class="right bold">Amount Paid: <%=  patient.totalBill %></p>
     </div>
-   <div class="print"> <button class="update">Print / Pdf </button></div>
+   <div class="print"> <button class="update"  onclick="window.open('/reception/printBill/<%= patient.pid %>', '_blank')">Print / Pdf </button></div>
 </div>
 
 </section>

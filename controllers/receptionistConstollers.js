@@ -229,7 +229,7 @@ exports.addPatientPage= async (req,res)=>{
     try{
          const nurses=await nurseSer.listNurse();
          const doctors=await doctorSer.getDoctors();
-         const rooms=await  roomSer.viewAllRooms();
+         const rooms=await  roomSer.availableRooms();
 
          res.render("receptionView/addPatient",{errors:undefined,gender:undefined,rooms:rooms,roomNo:undefined,nurse:undefined,doctor:undefined,status:undefined,nurses:nurses,doctors:doctors});
     }catch(err){
@@ -242,7 +242,7 @@ exports.createPatient=async(req,res)=>{
   let errors = {};
 
   if (!name) errors.name = "Name is required";
-  if (!age || isNaN(age)) errors.age = "Valid age is required";
+  if (!age || age<1 || isNaN(age)) errors.age = "Valid age is required";
   if (!contact || !/^[0-9]{10}$/.test(contact)) errors.contact = "Valid 10-digit contact required";
   if (!issue) errors.issue = "Issue is required";
   if (!roomNo) errors.roomNo = "Room number is required";
@@ -266,7 +266,8 @@ exports.createPatient=async(req,res)=>{
   }
 
     console.log("cp values "+name+age+gender+contact+issue+admitDate+roomNo+nurse+doctor);
-    
+        const bookRoom=await roomSer.setUnavailable(roomNo);
+        console.log("book room ",bookRoom);
         const  result=await  patiSer.addPatient(name,age,gender,contact,issue,admitDate,roomNo,nurse,doctor);
         if(typeof result ==="object")
             res.status(201).render("receptionView/addPatient",{errors:undefined,gender:undefined,rooms:rooms,roomNo:undefined,nurse:undefined,doctor:undefined,status:undefined,nurses:nurses,doctors:doctors,message:"Patient added Successfully"});
@@ -280,13 +281,58 @@ exports.createPatient=async(req,res)=>{
 exports.listPatient=async(req,res)=>{
     try{
         const result=await patiSer.viewAllPatient();
-        if(typeof result==="object"){
-            res.status(201).render("receptionView/viewPatient",{patients:result});
+        if(typeof result==="object"){   
+            let mess=req.session.succuessMessage;
+            delete req.session.succuessMessage;
+            res.status(201).render("receptionView/viewPatient",{patients:result,message:mess});
         }else{
             res.render("error",{message:result});
         }
     }catch(err){
         res.render("error",{message:err});
+    }
+}
+
+exports.getPatient=async (req,res)=>{
+    let id=req.params.id;
+    try{
+        const result=await patiSer.getPatient(id);
+        if(typeof result === "object")
+            res.send(result);
+        else    
+            res.render('error',{message:result});
+    }catch(err){
+         res.render('error',{message:err});
+    }
+}
+
+exports.updatePatient=async(req,res)=>{
+      let { id,name, age, contact, issue, roomNo, gender, admitDate, nurse, doctor } = req.body;
+    try{
+        const result=await patiSer.updatePatient(id,name, age, contact, issue, roomNo, gender, admitDate, nurse, doctor);
+          if(typeof result === "object"){
+            req.session.succuessMessage="patient Delete Successfully";
+            res.redirect("/reception/patients");
+          }else    
+            res.render('error',{message:result});
+    }catch(err){
+         res.render('error',{message:err});
+    }
+      
+}
+
+exports.deletePatient = async(req,res)=>{
+    let id=req.params.id;
+    try{
+        const result=await patiSer.deletePatient(id);
+       if(typeof result === "object"){
+            req.session.succuessMessage="patient Delete Successfully";
+            res.redirect("/reception/patients");
+       }else{    
+            res.render('error',{message:result});
+       }
+    }catch(err){
+         res.render('error',{message:err});
     }
 }
 
@@ -312,5 +358,18 @@ console.log("addbill returned:", addbill);
         
     }catch(err){
         res.render("error",{message:"problme in catch "+err});
+    }
+}
+
+exports.printBill=async(req,res)=>{
+    let id=req.params.id;
+    try{
+
+         const result=await billSer.getBill(id);
+         if(typeof result ==="object"){
+            res.render("receptionView/bill",{patient:result[0]});
+         }
+    }catch(err){
+
     }
 }
